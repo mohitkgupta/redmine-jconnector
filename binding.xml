@@ -1,0 +1,86 @@
+<binding>
+	<format type="java.util.Date" label="date-value"
+		serializer="com.vedantatree.redmineconnector.JIBXXMLJavaConvertor.serializeDate"
+		deserializer="com.vedantatree.redmineconnector.JIBXXMLJavaConvertor.deserializeDate" />
+
+	<format type="java.lang.Float" label="float-value"
+		serializer="com.vedantatree.redmineconnector.JIBXXMLJavaConvertor.serializeFloat"
+		deserializer="com.vedantatree.redmineconnector.JIBXXMLJavaConvertor.deserializeFloat" />
+
+	<mapping name="issues" class="java.util.ArrayList">
+
+	</mapping>
+
+	<mapping name="issue" class="com.vedantatree.redmineconnector.bdo.Issue"
+		ordered="false" flexible="true">
+		<value name="id" field="id" usage="optional" />
+
+		<structure name="project" field="project" value-style="attribute">
+			<value name="name" field="name" />
+			<value name="id" field="id" />
+		</structure>
+		<structure name="tracker" field="tracker" value-style="attribute"
+			usage="optional">
+			<value name="id" field="id" />
+			<value name="name" field="name" />
+		</structure>
+		<structure name="status" field="status" value-style="attribute"
+			usage="optional">
+			<value name="id" field="id" />
+			<value name="name" field="name" />
+		</structure>
+		<structure name="priority" field="priority" value-style="attribute">
+			<value name="id" field="id" />
+			<value name="name" field="name" usage="optional" />
+		</structure>
+		<structure name="author" field="author" value-style="attribute"
+			usage="optional">
+			<value name="id" field="id" />
+			<value name="name" field="name" />
+		</structure>
+		<structure name="assigned_to" field="assignedTo"
+			value-style="attribute" usage="optional">
+			<value name="id" field="id" />
+			<value name="name" field="name" />
+		</structure>
+
+		<value name="subject" field="subject" />
+		<value name="description" field="description" usage="optional" />
+		<value name="start_date" format="date-value" field="startDate"
+			usage="optional" />
+		<value name="due_date" format="date-value" field="dueDate"
+			usage="optional" />
+		<value name="done_ratio" field="percentageDone" usage="optional" />
+		<value name="estimated_hours" field="estimatedEfforts" usage="optional"
+			format="float-value" />
+		<value name="spent_hours" field="spentEfforts" usage="optional"
+			format="float-value" />
+
+		<value name="created_on" format="date-value" field="createdOn"
+			usage="optional" />
+		<value name="updated_on" format="date-value" field="updatedOn"
+			usage="optional" />
+	</mapping>
+
+	<mapping name="project" class="com.vedantatree.redmineconnector.bdo.Project"
+		ordered="false" flexible="true">
+		<value name="id" field="id" usage="optional" />
+		<value name="name" field="name" />
+		<value name="identifier" field="identifier" />
+		<value name="description" field="description" />
+		<value name="homepage" field="homePage" usage="optional" />
+		<value name="created_on" format="date-value" field="createdOn" />
+		<value name="updated_on" format="date-value" field="updatedOn" />
+
+		<collection name="trackers" field="trackers" flexible="false"
+			usage="optional">
+			<structure name="tracker"
+				type="com.vedantatree.redmineconnector.bdo.Tracker" value-style="attribute"
+				flexible="false">
+				<value name="name" field="name" />
+				<value name="id" field="id" />
+			</structure>
+		</collection>
+	</mapping>
+
+</binding>
