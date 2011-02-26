@@ -8,7 +8,7 @@
 		deserializer="com.vedantatree.redmineconnector.JIBXXMLJavaConvertor.deserializeFloat" />
 
 	<mapping name="issues" class="java.util.ArrayList">
-
+		
 	</mapping>
 
 	<mapping name="issue" class="com.vedantatree.redmineconnector.bdo.Issue"
