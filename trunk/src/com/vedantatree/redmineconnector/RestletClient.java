@@ -20,7 +20,7 @@ import com.vedantatree.redmineconnector.utils.ConfigurationManager;
  * This object works as client for Rest API. It is specifically designed for consuming the Redmine Rest API. For
  * implementation, it is using Restlet API.
  * 
- * @author Mohit Gupta <mohit.gupta@vedantatree.com>
+ * @author Mohit Gupta [mohit.gupta@vedantatree.com]
  */
 public class RestletClient
 {
@@ -129,7 +129,7 @@ public class RestletClient
 
 		LOGGER.debug( "status[" + response.getStatus() + "] isSuccessCode["
 				+ Status.isSuccess( response.getStatus().getCode() ) + "]" );
-		handleStatus( response.getStatus() );
+		// handleStatus( response.getStatus() );
 
 		// TODO: handle status, like authorization failure, server not working
 		Representation output = response.getEntity();
@@ -147,6 +147,11 @@ public class RestletClient
 		}
 		LOGGER.debug( "response-RestService[" + outputText + "]" );
 
+		// process status. If it is success, go ahead. If it is unprocessable_entity, throw error with output text.
+		// Output text will contain the error messages, which can be shown to user. If any other error, throw error
+		// without output text.
+		handleStatus( response.getStatus(), outputText );
+
 		return outputText;
 	}
 
@@ -157,7 +162,7 @@ public class RestletClient
 	 * @param restRequestStatus Status returned from Server
 	 * @throws RCException Throws Exception if response code is not favorable
 	 */
-	private void handleStatus( Status restRequestStatus ) throws RCException
+	private void handleStatus( Status restRequestStatus, String outputText ) throws RCException
 	{
 		int statusCode = restRequestStatus.getCode();
 		if( Status.isSuccess( statusCode ) )
@@ -170,7 +175,8 @@ public class RestletClient
 		{
 			rce = new RCException(
 					statusCode,
-					"Error Status Unprocessable_Entity 422 is returned from Redmine Server. Redmine server returns this when some data is not as per expected format. For example, any specified relational data is not found. Or you have used a Priority ID, which is not there in Redmine Database. Or if any mandatory field is not specified. Or date format is not correct. Or date data is not correct" );
+					"Error Status Unprocessable_Entity 422 is returned from Redmine Server. Redmine server returns this when some data is not as per expected format. For example, any specified relational data is not found. Or you have used a Priority ID, which is not there in Redmine Database. Or if any mandatory field is not specified. Or date format is not correct. Or date data is not correct",
+					outputText );
 		}
 		else
 		{

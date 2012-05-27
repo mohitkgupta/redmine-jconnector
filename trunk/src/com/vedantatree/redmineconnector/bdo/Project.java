@@ -15,20 +15,12 @@ import com.vedantatree.redmineconnector.utils.Utilities;
  * @author Mohit Gupta <mohit.gupta@vedantatree.com>
  */
 
-public class Project
+public class Project extends RedmineBDO
 {
 
-	private static Log			LOGGER	= LogFactory.getLog( Project.class );
+	private static Log	LOGGER	= LogFactory.getLog( Project.class );
 
-	private Long				id;
-	private String				name;
-	private String				identifier;
-	private String				description;
-	private String				homePage;
-	private Date				createdOn;
-	private Date				updatedOn;
-
-	private ArrayList<Tracker>	trackers;
+	private Long		id;
 
 	public Long getId()
 	{
@@ -39,6 +31,14 @@ public class Project
 	{
 		this.id = id;
 	}
+	private String				name;
+	private String				identifier;
+	private String				description;
+	private String				homePage;
+	private Date				createdOn;
+	private Date				updatedOn;
+
+	private ArrayList<Tracker>	trackers;
 
 	public String getName()
 	{
@@ -140,11 +140,11 @@ public class Project
 	{
 		if( LOGGER.isDebugEnabled() )
 		{
-			return "Project@" + hashCode() + ": id[" + id + "] name[" + name + "] identifier[" + identifier
+			return "Project@" + hashCode() + ": id[" + getId() + "] name[" + name + "] identifier[" + identifier
 					+ "] homePage[" + homePage + "] createdOn[" + createdOn + "] updatedOn[" + updatedOn
 					+ "] trackers[" + ( trackers == null ? -1 : trackers.size() ) + "] description[" + description
 					+ "]";
 		}
-		return "Project@" + hashCode() + ": id[" + id + "]";
+		return "Project@" + hashCode() + ": id[" + getId() + "]";
 	}
 }
