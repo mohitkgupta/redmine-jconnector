@@ -15,12 +15,14 @@ import com.vedantatree.redmineconnector.utils.Utilities;
  * @author Mohit Gupta <mohit.gupta@vedantatree.com>
  */
 
-public class Issue
+public class Issue extends RedmineBDO
 {
 
 	private static Log	LOGGER				= LogFactory.getLog( Issue.class );
 
+	// TODO - check if binding.xml has mapping for all fields
 	private Long		id;
+
 	private Issue		parent;
 	private String		subject;
 	private String		description;
@@ -228,7 +230,19 @@ public class Issue
 		}
 		else
 		{
-			getProject().validate( errors );
+			// getProject().validate( errors );
+
+			// duplicating the validation check for project here, instead of using from project object.
+			// because project validations checks Identifier property also, however, identifier is not set to project
+			// when it is returned with Issue
+			if( getProject().getId() == null )
+			{
+				errors.add( "Project Id is null" );
+			}
+			if( !Utilities.isQualifiedString( getProject().getName() ) )
+			{
+				errors.add( "Project Name is null." );
+			}
 		}
 		if( !Utilities.isQualifiedString( getSubject() ) )
 		{
@@ -262,11 +276,11 @@ public class Issue
 	{
 		if( LOGGER.isDebugEnabled() )
 		{
-			return "Issue@" + hashCode() + ": id[" + id + "] subject[" + subject + "] startDate[" + startDate
+			return "Issue@" + hashCode() + ": id[" + getId() + "] subject[" + subject + "] startDate[" + startDate
 					+ "] endDate[" + dueDate + "] estimateEfforts[" + estimatedEfforts + "] spentEfforts["
 					+ spentEfforts + "] percentageDone[" + percentageDone + "] assignedTo[" + assignedTo
 					+ "] createdOn[" + createdOn + "] updatedOn[" + updatedOn + "] author[" + author + "]";
 		}
-		return "Issue@" + hashCode() + ": id[" + id + "]";
+		return "Issue@" + hashCode() + ": id[" + getId() + "]";
 	}
 }

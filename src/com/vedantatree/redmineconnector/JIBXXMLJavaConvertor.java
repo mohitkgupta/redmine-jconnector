@@ -26,7 +26,7 @@ import com.vedantatree.redmineconnector.utils.Utilities;
  * This object is used to convert the Java Object to XML format and vice versa. For implementation, it is using JIBX
  * library. The mapping for conversion can be found in 'binding.xml' file
  * 
- * @author Mohit Gupta <mohit.gupta@vedantatree.com>
+ * @author Mohit Gupta [mohit.gupta@vedantatree.com]
  */
 
 public class JIBXXMLJavaConvertor
@@ -103,6 +103,7 @@ public class JIBXXMLJavaConvertor
 	public Object xmlToJava( String XML, Class clazz ) throws RCException
 	{
 		LOGGER.trace( "xmlToJava: XMLLength[" + ( XML != null ? XML.length() : -1 ) + "] clazz[" + clazz + "]" );
+		LOGGER.debug( "XML >> \n" + XML + "\n\n" );
 		try
 		{
 			// note that you can use multiple bindings with the same class, in
@@ -179,7 +180,7 @@ public class JIBXXMLJavaConvertor
 	{
 		LOGGER.trace( "issueXMLToCreateIssue: issue[" + issue + "]" );
 
-		Utilities.assertNotNullArgument( issue );
+		Utilities.assertNotNullArgument( issue, "issue" );
 		List<String> errors = issue.validate( null );
 		if( errors != null && errors.size() > 0 )
 		{
@@ -309,11 +310,11 @@ public class JIBXXMLJavaConvertor
 	 */
 	public static Date deserializeDate( String text ) throws JiBXException
 	{
-		LOGGER.trace( "deserializeDate: text[" + text + "]" );
+		// LOGGER.trace( "deserializeDate: text[" + text + "]" );
 
 		if( !Utilities.isQualifiedString( text ) )
 		{
-			LOGGER.debug( "Returning Null as date text is null" );
+			// LOGGER.debug( "Returning Null as date text is null" );
 			return null;
 		}
 
@@ -322,19 +323,19 @@ public class JIBXXMLJavaConvertor
 
 		try
 		{
-			LOGGER.debug( "trying to parse date with format[yyyy-mm-dd]" );
+			// LOGGER.debug( "trying to parse date with format[yyyy-mm-dd]" );
 			return dateFormat_simple.parse( text );
 		}
 		catch( ParseException e )
 		{
 			try
 			{
-				LOGGER.debug( "trying to parse date with format[EEE MMM dd HH:mm:ss Z YYYY]" );
+				// LOGGER.debug( "trying to parse date with format[EEE MMM dd HH:mm:ss Z YYYY]" );
 				return dateFormat_Redmine.parse( text );
 			}
 			catch( ParseException e1 )
 			{
-				LOGGER.debug( "Passing call to JiBX for parsing" );
+				// LOGGER.debug( "Passing call to JiBX for parsing" );
 				return Utility.deserializeDate( text );
 			}
 		}

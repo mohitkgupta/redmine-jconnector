@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projects type="array" limit="25" total_count="4" offset="0">
+	<project>
+		<id>3</id>
+		<name>Project To Delete</name>
+		<identifier>projectdelete</identifier>
+		<description></description>
+		<created_on>2011-02-06T16:34:23+02:00</created_on>
+		<updated_on>2011-02-06T16:34:23+02:00</updated_on>
+	</project>
+	<project>
+		<id>4</id>
+		<name>RemoteProject1</name>
+		<identifier>rptemp</identifier>
+		<description>This is a test remote project from RedmineConnector API</description>
+		<created_on>2011-02-13T02:21:50+02:00</created_on>
+		<updated_on>2011-02-13T02:21:50+02:00</updated_on>
+	</project>
+	<project>
+		<id>2</id>
+		<name>Temp</name>
+		<identifier>temp</identifier>
+		<description></description>
+		<created_on>2010-12-30T15:53:57+02:00</created_on>
+		<updated_on>2010-12-30T15:53:57+02:00</updated_on>
+	</project>
+	<project>
+		<id>1</id>
+		<name>Test Demo Project</name>
+		<identifier>test-demo</identifier>
+		<description></description>
+		<created_on>2010-12-30T15:23:07+02:00</created_on>
+		<updated_on>2010-12-30T15:23:07+02:00</updated_on>
+	</project>
+</projects>
