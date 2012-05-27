@@ -1,9 +1,14 @@
 <?xml version="1.0"?>
 
-<project name="RedmineJConnector" basedir="." default="build">
+<project name="RedmineJConnector" basedir="." default="dist">
 
 	<property name="name" value="RedmineJConnector" />
+	<property name="root" value="." />
 	<property name="src.dir" value="src" />
+	<property name="test.dir" value="tests" />
+	<property name="build.dir" value="build" />
+	<property name="dist.dir" value="dist" />
+	<property name="test.reports.dir" value="testreports" />
 	<property name="lib.dir" value="lib" />
 	<property name="javadoc.dir" value="javadocs" />
 
@@ -48,19 +53,23 @@
 
 	<!-- clean compiled class files and output file -->
 	<target name="clean">
-		<delete quiet="true" dir="${basedir}/bin" />
+		<delete quiet="true" dir="${build.dir}" />
 		<delete quiet="true" file="${basedir}/out.xml" />
+		<delete dir="${test.reports.dir}" />
 	</target>
 
 	<!-- compile as a separate step -->
 	<target name="compile" depends="clean,check-runtime">
 
 		<echo message="Compiling Java source code" />
-		<mkdir dir="${basedir}/bin" />
-		<javac srcdir="${basedir}/src" destdir="${basedir}/bin" debug="on">
+		<mkdir dir="${build.dir}" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" debug="on">
 			<classpath refid="classpath" />
 		</javac>
-		<copy todir="${basedir}/bin">
+		<javac srcdir="${test.dir}" destdir="${build.dir}" debug="on">
+			<classpath refid="classpath" />
+		</javac>
+		<copy todir="${build.dir}">
 			<fileset dir="${basedir}/src">
 				<include name="**/*.xml" />
 				<include name="**/*.properties" />
@@ -84,7 +93,16 @@
 	</target>
 
 	<!-- compile and bind -->
-	<target name="build" depends="compile,bind" />
+	<target name="build" depends="compile, bind" />
+
+	<target name="dist" depends="run-tests">
+		<delete dir="${dist.dir}" />
+		<mkdir dir="${dist.dir}" />
+		<echo message="in dist folder" />
+
+		<jar jarfile="${dist.dir}/vts-redmineconnector.jar" compress="true" basedir="${build.dir}" />
+
+	</target>
 
 	<!-- test binding with jibx-extras roundtripping tool -->
 	<target name="roundtrip" depends="check-extras">
@@ -129,9 +147,55 @@
 	<link href="http://java.sun.com/j2ee/1.4/docs/api" />
 	<link href="http://www.junit.org/junit/javadoc/" />
 	<link href="http://logging.apache.org/log4j/docs/api/" />
+	<link href="http://jibx.sourceforge.net/" />
 </javadoc>
 
 </target>
+
+<taskdef name="junit" classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask">
+<classpath>
+	<pathelement path="${antclasspath}" />
+</classpath>
+</taskdef>
+
+<taskdef name="junitreport" classname="org.apache.tools.ant.taskdefs.optional.junit.XMLResultAggregator">
+<classpath>
+	<pathelement path="${antclasspath}" />
+</classpath>
+</taskdef>
+
+<!-- Running test cases -->
+<target name="run-tests" description="Run tests and generate test summary" depends="build">
+
+<mkdir dir="${test.reports.dir}" />
+<!--
+	dir="${root}" 
+	-->
+<junit printsummary="yes" haltonfailure="no" haltonerror="no">
+	<jvmarg line="-Djava.awt.headless=true" />
+	<jvmarg line="-XX:MaxPermSize=96m" />
+
+	<classpath refid="classpath" />
+	<!--classpath location="${test.dir}/com/vedantatree/redmineconnector/test" /-->
+
+	<formatter type="plain" usefile="false" />
+	<formatter type="xml" />
+	<!--test name="com.vedantatree.redmineconnector.test.RCTestCase" /-->
+
+	<batchtest fork="yes" todir="${test.reports.dir}">
+		<fileset dir="${test.dir}">
+			<include name="**/*TestCase*.java" />
+		</fileset>
+	</batchtest>
+</junit>
+<junitreport todir="${test.reports.dir}">
+	<fileset dir="${test.reports.dir}">
+		<include name="TEST-*.xml" />
+	</fileset>
+	<report todir="${test.reports.dir}" />
+</junitreport>
+</target>
+
 
 <!-- show list of targets -->
 <target name="help">
