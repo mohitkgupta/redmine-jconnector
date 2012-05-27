@@ -1,0 +1,7 @@
+Redmine REST API Reference - http://www.redmine.org/projects/redmine/wiki/Rest_api
+Redmine Download - http://www.redmine.org/projects/redmine/wiki/Download
+Install Redmine - http://www.redmine.org/projects/redmine/wiki/RedmineInstall
+Upgrade Redmine - http://www.redmine.org/projects/redmine/wiki/RedmineUpgrade
+
+
+Start Redmine in Testing >>>>> ruby script/server webrick -e production
