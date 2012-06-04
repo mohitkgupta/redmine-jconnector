@@ -10,6 +10,7 @@ import com.vedantatree.redmineconnector.bdo.Issue;
 import com.vedantatree.redmineconnector.bdo.IssuesContainer;
 import com.vedantatree.redmineconnector.bdo.Project;
 import com.vedantatree.redmineconnector.bdo.ProjectsContainer;
+import com.vedantatree.redmineconnector.bdo.User;
 import com.vedantatree.redmineconnector.utils.ConfigurationManager;
 import com.vedantatree.redmineconnector.utils.Utilities;
 
@@ -443,6 +444,134 @@ public class RedmineConnector
 
 			return new DefaultDataPaginator( IssuesContainer.class, urlBuilder.buildURLToGetObjectsList( Issue.class,
 					includes, filterCritera ), startRecordIndex, pageSize );
+		}
+		catch( Exception ex )
+		{
+			throw handleException( ex );
+		}
+	}
+
+	/**
+	 * It is used to create the Redmine User in Redmine Server.
+	 * 
+	 * @param newProject New Redmine User Object to save
+	 * @return Newly created Redmine User Object from Redmine Server
+	 * @throws RCException if there is any problem
+	 * @since 1.1.0
+	 */
+	public User createUser( User newUser ) throws RCException
+	{
+		LOGGER.trace( "createUser: newUser[" + newUser + "]" );
+		Utilities.assertNotNullArgument( newUser, "newUser" );
+
+		try
+		{
+			String requestURL = urlBuilder.buildURLToCreateObject( User.class );
+			return (User) createOrUpdateRedmineObject( requestURL, newUser, true );
+		}
+		catch( Exception ex )
+		{
+			throw handleException( ex );
+		}
+	}
+
+	/**
+	 * This method updates a Redmine User to Redmine Server
+	 * 
+	 * @param updatedUser Changed Redmine User to update in Redmine Server
+	 * @return Saved Redmine User object from Redmine Server
+	 * @throws RCException if there is any problem
+	 * @since 1.1.0
+	 */
+	public void updateUser( Project updatedUser ) throws RCException
+	{
+		LOGGER.trace( "updateUser: chanegdUser[" + updatedUser + "]" );
+		Utilities.assertNotNullArgument( updatedUser, "updatedUser" );
+
+		try
+		{
+			String requestURL = urlBuilder.buildURLToUpdateObject( User.class, updatedUser.getId() );
+			createOrUpdateRedmineObject( requestURL, updatedUser, false );
+		}
+		catch( Exception ex )
+		{
+			throw handleException( ex );
+		}
+	}
+
+	/**
+	 * This method deletes an existing User from Redmine Server
+	 * 
+	 * @param userId Id of the User to delete
+	 * @return True if deleted, false otherwise
+	 * @throws RCException If there is any problem
+	 * @since 1.1.0
+	 */
+	public boolean deleteUser( long userId ) throws RCException
+	{
+		LOGGER.trace( "deleteUser: userId[" + userId + "]" );
+
+		try
+		{
+			String requestURL = urlBuilder.buildURLToDeleteObject( User.class, userId );
+			return deleteRedmineObject( requestURL );
+		}
+		catch( Exception ex )
+		{
+			throw handleException( ex );
+		}
+	}
+
+	/**
+	 * This method fetches the User Object from Redmine Server for specified user id
+	 * 
+	 * @param userId id of the user to fetch
+	 * @param includes Collection of 'include' criteria, based on which sub-objects will be included in User
+	 * @return User Object if found
+	 * @throws RCException If there is any problem
+	 * @since 1.1.0
+	 */
+	public Project getUserById( long userId, Collection<String> includes ) throws RCException
+	{
+		LOGGER.trace( "getUserById: userId[" + userId + "]" );
+
+		Utilities.assertNotNullArgument( userId, "User Id" );
+
+		try
+		{
+			String requestURL = urlBuilder.buildURLToGetObjectById( User.class, userId, includes );
+			return (Project) getRedmineObject( requestURL, User.class );
+		}
+		catch( Exception ex )
+		{
+			throw handleException( ex );
+		}
+	}
+
+	/**
+	 * This method helps to access all users exist on Redmine server with the help of an iterator. Please refer to
+	 * documentation of 'getIssues()' for more detail.
+	 * 
+	 * @return Data Paginator which will help to access all users from Redmine Server
+	 * @throws RCException If there is any problem
+	 * @since 1.1.0
+	 */
+	public RedmineDataPaginator getUsersIterator( long startRecordIndex, int pageSize, Collection<String> includes,
+			Map<String, String> filterCritera ) throws RCException
+	{
+		LOGGER.trace( "getProjects" );
+
+		try
+		{
+			if( pageSize > RedmineDataPaginator.REDMINE_MAX_PAGE_SIZE )
+			{
+				throw new RCException( RCException.ILLEGAL_ARGUMENT,
+						"Specified Page size is greater than the supported maximum page size by Redmine. supported-Size["
+								+ RedmineDataPaginator.REDMINE_MAX_PAGE_SIZE + "]" );
+			}
+
+			return new DefaultDataPaginator( ProjectsContainer.class, urlBuilder.buildURLToGetObjectsList(
+					User.class, includes, filterCritera ), startRecordIndex, pageSize );
 		}
 		catch( Exception ex )
 		{

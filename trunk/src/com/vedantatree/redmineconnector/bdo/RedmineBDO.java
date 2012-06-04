@@ -1,18 +1,18 @@
 package com.vedantatree.redmineconnector.bdo;
 
-public class RedmineBDO
+import java.util.List;
+
+
+public abstract class RedmineBDO
 {
 
-	private Long	id;
+	// no use of keeping id here, as Jibx is not supporting property from parent class. We may need to explore more.
+	// private Long id;
 
-	public Long getId()
-	{
-		return id;
-	}
+	public abstract Long getId();
 
-	public void setId( Long id )
-	{
-		this.id = id;
-	}
+	public abstract void setId( Long id );
+
+	public abstract List<String> validate( List<String> errors );
 
 }

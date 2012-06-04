@@ -1,0 +1,3 @@
+jibx - 1.2.4 - http://jibx.sourceforge.net/
+jibx eclipse plugin - http://jibx.sourceforge.net/eclipse/
+junit - 4.1

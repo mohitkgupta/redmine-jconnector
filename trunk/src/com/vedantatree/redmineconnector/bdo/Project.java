@@ -18,12 +18,20 @@ import com.vedantatree.redmineconnector.utils.Utilities;
 public class Project extends RedmineBDO
 {
 
-	private static Log	LOGGER	= LogFactory.getLog( Project.class );
-	
-	public static String INCLUDE_TRACKERS = "trackers";
-	public static String INCLUDE_ISSUE_CATEGORIES = "issue_categories";
+	private static Log			LOGGER						= LogFactory.getLog( Project.class );
 
-	private Long		id;
+	public static String		INCLUDE_TRACKERS			= "trackers";
+	public static String		INCLUDE_ISSUE_CATEGORIES	= "issue_categories";
+
+	private Long				id;
+	private String				name;
+	private String				identifier;
+	private String				description;
+	private String				homePage;
+	private Date				createdOn;
+	private Date				updatedOn;
+
+	private ArrayList<Tracker>	trackers;
 
 	public Long getId()
 	{
@@ -34,14 +42,6 @@ public class Project extends RedmineBDO
 	{
 		this.id = id;
 	}
-	private String				name;
-	private String				identifier;
-	private String				description;
-	private String				homePage;
-	private Date				createdOn;
-	private Date				updatedOn;
-
-	private ArrayList<Tracker>	trackers;
 
 	public String getName()
 	{

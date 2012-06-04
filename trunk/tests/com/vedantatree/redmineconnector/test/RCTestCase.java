@@ -38,6 +38,15 @@ public class RCTestCase
 {
 
 	private static Log				LOGGER					= LogFactory.getLog( RCTestCase.class );
+	/**
+	 * Default value for User. It is corresponding to Default value in Redmine. If anyone has created new objects, then
+	 * these values may vary
+	 * 
+	 * For testing purpose only
+	 * */
+	public static User		REDMINE_ADMIN		= new User( new Long( 1 ) );
+
+
 
 	private RedmineConnector	redmineConnector;
 	private static int			projectIdentifer = Integer.MIN_VALUE;
@@ -271,7 +280,7 @@ public class RCTestCase
 		testIssue.setPriority( Priority.HIGH );
 		testIssue.setTracker( Tracker.FEATURE );
 		testIssue.setStatus( Status.IN_PROGRESS );
-		testIssue.setAssignedTo( User.REDMINE_ADMIN );
+		testIssue.setAssignedTo( REDMINE_ADMIN );
 
 		return testIssue;
 	}
