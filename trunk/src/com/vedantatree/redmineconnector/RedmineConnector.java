@@ -1,5 +1,8 @@
 package com.vedantatree.redmineconnector;
 
+import java.util.Collection;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -44,8 +47,16 @@ public class RedmineConnector
 
 	/**
 	 * Shared Singleton instance of Redmine Connector
+	 * 
+	 * @deprecated RedmineConnector has been upgraded from Singleton pattern to normal object pattern. Use Constructor
+	 *             to create a new instance with parameters.
 	 */
 	private static RedmineConnector	SHARED_INSTANCE			= new RedmineConnector();
+
+	/**
+	 * Component to build the URL for various kind of requests, for different objects
+	 */
+	private URLBuilder				urlBuilder;
 
 	/**
 	 * Client for consuming the Redmine Rest services. It is developed using 'Restlet' API
@@ -58,31 +69,57 @@ public class RedmineConnector
 	private JIBXXMLJavaConvertor	xmlJavaConvertor;
 
 	/**
-	 * Security Key to access the Redmine. It is read from configuration file.
+	 * @deprecated RedmineConnector has been upgraded from Singleton pattern to normal object pattern. Use Constructor
+	 *             to create a new instance with parameters.
 	 */
-	private String					securityKey;
-
 	private RedmineConnector()
 	{
-		// instantiate restlet client, picking redmine server address from configuration file
-		restletClient = new RestletClient( ConfigurationManager.getSharedInstance().getPropertyValue(
-				REDMINE_SERVER_ADDRESS ) );
-
-		// instantiate XML 2 Java / Java 2 XML converter
-		xmlJavaConvertor = new JIBXXMLJavaConvertor();
+		// pick server host address from configuration file
+		String confServerAddress = ConfigurationManager.getSharedInstance().getPropertyValue( REDMINE_SERVER_ADDRESS );
 
 		// pick security key from configuration file
-		securityKey = ConfigurationManager.getSharedInstance().getPropertyValue( SECURITY_KEY );
+		String confSecurityKey = ConfigurationManager.getSharedInstance().getPropertyValue( SECURITY_KEY );
+
+		initialize( confServerAddress, confSecurityKey );
+	}
+
+	public RedmineConnector( String redmineServerHost, String apiAccessKey )
+	{
+		Utilities.assertQualifiedString( redmineServerHost, "Redmine Server Host" );
+		Utilities.assertQualifiedString( apiAccessKey, "API Access Key" );
+
+		initialize( redmineServerHost, apiAccessKey );
 	}
 
 	/**
 	 * It returns the shared instance of RedmineConnector
 	 * 
 	 * @return Share Redmine Connector
+	 * 
+	 * @deprecated RedmineConnector has been upgraded from Singleton pattern to normal object pattern. Use Constructor
+	 *             to create a new instance with parameters. This method can be removed anytime with later releases.
 	 */
 	public static RedmineConnector getSharedInstance()
 	{
 		return SHARED_INSTANCE;
+	}
+
+	/**
+	 * Initialize the RedmineConnector object by creating internal components
+	 * 
+	 * @param serverHostAddress Address of the server
+	 * @param securityKey API Access Key for Redmine
+	 */
+	private void initialize( String serverHostAddress, String securityKey )
+	{
+		// instantiate restlet client, picking redmine server address from configuration file
+		restletClient = new RestletClient();
+
+		// instantiate XML 2 Java / Java 2 XML converter
+		xmlJavaConvertor = new JIBXXMLJavaConvertor();
+
+		// instantiate URL Builder
+		urlBuilder = new URLBuilder( serverHostAddress, securityKey );
 	}
 
 	/**
@@ -99,7 +136,7 @@ public class RedmineConnector
 
 		try
 		{
-			String requestURL = "/projects.xml?key=" + getSecurityKey();
+			String requestURL = urlBuilder.buildURLToCreateObject( Project.class );
 			return (Project) createOrUpdateRedmineObject( requestURL, newProject, true );
 		}
 		catch( Exception ex )
@@ -122,7 +159,7 @@ public class RedmineConnector
 
 		try
 		{
-			String requestURL = "/projects/" + updatedProject.getId() + ".xml?key=" + getSecurityKey();
+			String requestURL = urlBuilder.buildURLToUpdateObject( Project.class, updatedProject.getId() );
 			createOrUpdateRedmineObject( requestURL, updatedProject, false );
 		}
 		catch( Exception ex )
@@ -144,7 +181,7 @@ public class RedmineConnector
 
 		try
 		{
-			String requestURL = "/projects/" + projectId + ".xml?key=" + getSecurityKey();
+			String requestURL = urlBuilder.buildURLToDeleteObject( Project.class, projectId );
 			return deleteRedmineObject( requestURL );
 		}
 		catch( Exception ex )
@@ -159,13 +196,32 @@ public class RedmineConnector
 	 * @param projectId id of the project to fetch
 	 * @return Project Object if found
 	 * @throws RCException If there is any problem
+	 * 
+	 * @deprecated since 1.1. Use getProjectById (projectId, includes) instead. This method will be removed with future
+	 *             releases.
 	 */
 	public Project getProjectById( long projectId ) throws RCException
 	{
+		return getProjectById( projectId, null );
+	}
+
+	/**
+	 * This method fetches the Project Object from Redmine Server for specified project id
+	 * 
+	 * @param projectId id of the project to fetch
+	 * @param includes Collection of 'include' criteria, based on which sub-objects will be included in project
+	 * @return Project Object if found
+	 * @throws RCException If there is any problem
+	 */
+	public Project getProjectById( long projectId, Collection<String> includes ) throws RCException
+	{
 		LOGGER.trace( "getProjectById: projectId[" + projectId + "]" );
+
+		Utilities.assertNotNullArgument( projectId, "Project Id" );
+
 		try
 		{
-			String requestURL = "/projects/" + projectId + ".xml?include=trackers";
+			String requestURL = urlBuilder.buildURLToGetObjectById( Project.class, projectId, includes );
 			return (Project) getRedmineObject( requestURL, Project.class );
 		}
 		catch( Exception ex )
@@ -180,13 +236,38 @@ public class RedmineConnector
 	 * 
 	 * @return Data Paginator which will help to access all projects from Redmine Server
 	 * @throws RCException If there is any problem
+	 * 
+	 * @deprecated since 1.1. Use getProjectsIterator() instead. This method will be removed with future versions.
 	 */
 	public RedmineDataPaginator getProjects() throws RCException
 	{
 		LOGGER.trace( "getProjects" );
+		return getProjectsIterator( 0, 25, null, null );
+	}
+
+	/**
+	 * This method helps to access all projects exist on Redmine server with the help of an iterator. Please refer to
+	 * documentation of 'getIssues()' for more detail.
+	 * 
+	 * @return Data Paginator which will help to access all projects from Redmine Server
+	 * @throws RCException If there is any problem
+	 */
+	public RedmineDataPaginator getProjectsIterator( long startRecordIndex, int pageSize, Collection<String> includes,
+			Map<String, String> filterCritera ) throws RCException
+	{
+		LOGGER.trace( "getProjects" );
+
 		try
 		{
-			return new DefaultDataPaginator( ProjectsContainer.class, "/projects.xml", 0, 50 );
+			if( pageSize > RedmineDataPaginator.REDMINE_MAX_PAGE_SIZE )
+			{
+				throw new RCException( RCException.ILLEGAL_ARGUMENT,
+						"Specified Page size is greater than the supported maximum page size by Redmine. supported-Size["
+								+ RedmineDataPaginator.REDMINE_MAX_PAGE_SIZE + "]" );
+			}
+
+			return new DefaultDataPaginator( ProjectsContainer.class, urlBuilder.buildURLToGetObjectsList(
+					Project.class, includes, filterCritera ), startRecordIndex, pageSize );
 		}
 		catch( Exception ex )
 		{
@@ -207,7 +288,7 @@ public class RedmineConnector
 		Utilities.assertNotNullArgument( newIssue, "newIssue" );
 		try
 		{
-			String requestURL = "/issues.xml?key=" + getSecurityKey();
+			String requestURL = urlBuilder.buildURLToCreateObject( Issue.class );
 			return (Issue) createOrUpdateRedmineObject( requestURL, newIssue, true );
 		}
 		catch( Exception ex )
@@ -229,7 +310,7 @@ public class RedmineConnector
 		Utilities.assertNotNullArgument( updatedIssue, "updatedIssue" );
 		try
 		{
-			String requestURL = "/issues/" + updatedIssue.getId() + ".xml?key=" + getSecurityKey();
+			String requestURL = urlBuilder.buildURLToUpdateObject( Issue.class, updatedIssue.getId() );
 			createOrUpdateRedmineObject( requestURL, updatedIssue, false );
 		}
 		catch( Exception ex )
@@ -249,7 +330,7 @@ public class RedmineConnector
 	{
 		try
 		{
-			String requestURL = "/issues/" + issueId + ".xml?key=" + getSecurityKey();
+			String requestURL = urlBuilder.buildURLToDeleteObject( Issue.class, issueId );
 			return deleteRedmineObject( requestURL );
 		}
 		catch( Exception ex )
@@ -264,12 +345,32 @@ public class RedmineConnector
 	 * @param issueId Id of the issue to fetch
 	 * @return Issue object if found
 	 * @throws RCException if there is any problem
+	 * 
+	 * @deprecated since 1.1. Use getIssueById (projectId, includes) instead. This method will be removed with future
+	 *             releases.
 	 */
 	public Issue getIssueById( long issueId ) throws RCException
 	{
+		return getIssueById( issueId, null );
+	}
+
+	/**
+	 * This method fetches the Issue Object from Redmine Server for specified issue id
+	 * 
+	 * @param issueId id of the Issue to fetch
+	 * @param includes Collection of 'include' criteria, based on which sub-objects will be included in Issue
+	 * @return Issue Object if found
+	 * @throws RCException If there is any problem
+	 */
+	public Issue getIssueById( long issueId, Collection<String> includes ) throws RCException
+	{
+		LOGGER.trace( "getIssueById: issueId[" + issueId + "] includes[" + includes + "]" );
+
+		Utilities.assertNotNullArgument( issueId, "Issue Id" );
+
 		try
 		{
-			String requestURL = "/issues/" + issueId + ".xml";
+			String requestURL = urlBuilder.buildURLToGetObjectById( Issue.class, issueId, includes );
 			return (Issue) getRedmineObject( requestURL, Issue.class );
 		}
 		catch( Exception ex )
@@ -294,12 +395,54 @@ public class RedmineConnector
 	 * 
 	 * @return A data paginator which will help to iterate over list of issues
 	 * @throws RCException If there is any problem
+	 * 
+	 * @deprecated since 1.1. Use getIssuesIterator() instead. This method will be removed with future versions.
 	 */
 	public RedmineDataPaginator getIssues() throws RCException
 	{
+		return getIssuesIterator( 0, 25, null, null );
+	}
+
+	/**
+	 * This method facilitates to fetch all issues exist in Redmine.
+	 * 
+	 * Issues can be in hundreds, thousands or more. So to avoid pressure on memory and CPU, this method will return a
+	 * Data Paginator. This pagintor API can be used to check whether server has more objects or not, and if it has, its
+	 * method can be called to retrieve next page of records. This way, it helps to iterate over the available records
+	 * in small chunks and hence helps to avoid memory issues.
+	 * 
+	 * However, if user wants, she can call 'getAllRecords' method of paginator to access all objects in one call.
+	 * Please take a informed decision, considering that it will put a lot of pressure on memory and CPU if number of
+	 * objects are big in numbers.
+	 * 
+	 * Paginator will start from 0th index of records, and will return 50 records with each page.
+	 * 
+	 * @param startRecordIndex Index of record start record
+	 * @param pageSize size of one page fetched by Iterator in one request to Redmine Server. Iterator will fetch the
+	 *        records in pages, to avoid burden on server and client both due to large amount of data in transfer
+	 * @param includes Collection of 'include' criteria, based on this, sub-objects will be included with returned Issue
+	 *        objects
+	 * @param filterCriteria Various possible filter criteria in key<>value form. These will be applied to data set
+	 *        while querying the Redmine Data to fetch the records
+	 * @return A data paginator which will help to iterate over list of issues
+	 * @throws RCException If there is any problem
+	 */
+	public RedmineDataPaginator getIssuesIterator( long startRecordIndex, int pageSize, Collection<String> includes,
+			Map<String, String> filterCritera ) throws RCException
+	{
+		LOGGER.trace( "getProjects" );
+
 		try
 		{
-			return new DefaultDataPaginator( IssuesContainer.class, "/issues.xml", 0, 50 );
+			if( pageSize > RedmineDataPaginator.REDMINE_MAX_PAGE_SIZE )
+			{
+				throw new RCException( RCException.ILLEGAL_ARGUMENT,
+						"Specified Page size is greater than the supported maximum page size by Redmine. supported-Size["
+								+ RedmineDataPaginator.REDMINE_MAX_PAGE_SIZE + "]" );
+			}
+
+			return new DefaultDataPaginator( IssuesContainer.class, urlBuilder.buildURLToGetObjectsList( Issue.class,
+					includes, filterCritera ), startRecordIndex, pageSize );
 		}
 		catch( Exception ex )
 		{
@@ -364,11 +507,6 @@ public class RedmineConnector
 		return new RCException( RCException.ILLEGAL_STATE, ex );
 	}
 
-	private String getSecurityKey()
-	{
-		return securityKey;
-	}
-
 	public static void main( String[] args ) throws Exception
 	{
 		ProjectsContainer container = (ProjectsContainer) new RedmineConnector().getProjects();
@@ -376,11 +514,3 @@ public class RedmineConnector
 	}
 
 }
-
-// ---------------------------------------------------------------------------------------------------------------------
-
-// public static byte OPEARTION_TYPE_CREATE = 0;
-// public static byte OPEARTION_TYPE_UPDATE = 1;
-// public static byte OPEARTION_TYPE_DELETE = 2;
-// public static byte OPEARTION_TYPE_READ = 3;
-

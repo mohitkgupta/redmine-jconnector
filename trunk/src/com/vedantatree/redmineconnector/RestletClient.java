@@ -14,6 +14,7 @@ import org.restlet.data.Status;
 import org.restlet.representation.Representation;
 
 import com.vedantatree.redmineconnector.utils.ConfigurationManager;
+import com.vedantatree.redmineconnector.utils.Utilities;
 
 
 /**
@@ -28,18 +29,11 @@ public class RestletClient
 	private static Log	LOGGER	= LogFactory.getLog( RestletClient.class );
 
 	/**
-	 * Address of the Redmine Server
-	 */
-	private String		serverAddress;
-
-	/**
-	 * Constructor accepting Redmine Server Address
+	 * Package Private Constructor
 	 * 
-	 * @param serverAddress Address of Redmine Server
 	 */
-	RestletClient( String serverAddress )
+	RestletClient()
 	{
-		this.serverAddress = serverAddress;
 	}
 
 	/**
@@ -98,11 +92,9 @@ public class RestletClient
 
 	private String executeRequest( Method operationMethod, String URL, String contents ) throws RCException
 	{
-		LOGGER.trace( "executeRequest: operationMethod[" + operationMethod.getName() + "] URL[" + URL + "] host["
-				+ getServerAddress() + "]" );
+		LOGGER.trace( "executeRequest: operationMethod[" + operationMethod.getName() + "] URL[" + URL + "]" );
 
-		URL = getServerAddress() + URL;
-		LOGGER.debug( "URL-with-host[" + URL + "]" );
+		Utilities.assertQualifiedString( URL, "URL" );
 
 		Request request = new Request( operationMethod, URL );
 
@@ -127,29 +119,40 @@ public class RestletClient
 		Client client = new Client( Protocol.HTTP );
 		Response response = client.handle( request );
 
-		LOGGER.debug( "status[" + response.getStatus() + "] isSuccessCode["
-				+ Status.isSuccess( response.getStatus().getCode() ) + "]" );
+		boolean success = Status.isSuccess( response.getStatus().getCode() );
+		boolean unprocessableEntity = response.getStatus().getCode() == RCException.UNPROCESSABLE_ENTITY;
+
+		LOGGER.debug( "status[" + response.getStatus() + "] isSuccessCode[" + success + "]" );
+
+		// commented from here and shifted down, because we need output text also (error xml) in case of un-processable
+		// entity
 		// handleStatus( response.getStatus() );
 
-		// TODO: handle status, like authorization failure, server not working
 		Representation output = response.getEntity();
 
 		// if you call getText on output, it wipes out the contents from output. Hence second call will return null
-		String outputText;
-		try
+		String outputText = null;
+
+		// get output text only if request was successful, or if we get un-processable entity error, when we shall get
+		// the list of errors in XML form
+		if( success || unprocessableEntity )
 		{
-			outputText = output.getText();
-		}
-		catch( IOException e )
-		{
-			LOGGER.error( e );
-			throw new RCException( RCException.IO_ERROR, "Error while getting output response text " );
+			try
+			{
+				outputText = output.getText();
+			}
+			catch( IOException e )
+			{
+				LOGGER.error( e );
+				throw new RCException( RCException.IO_ERROR, "Error while getting output response text " );
+			}
 		}
 		LOGGER.debug( "response-RestService[" + outputText + "]" );
 
 		// process status. If it is success, go ahead. If it is unprocessable_entity, throw error with output text.
 		// Output text will contain the error messages, which can be shown to user. If any other error, throw error
 		// without output text.
+		// TODO: handle status, like authorization failure, server not working
 		handleStatus( response.getStatus(), outputText );
 
 		return outputText;
@@ -165,38 +168,59 @@ public class RestletClient
 	private void handleStatus( Status restRequestStatus, String outputText ) throws RCException
 	{
 		int statusCode = restRequestStatus.getCode();
+
 		if( Status.isSuccess( statusCode ) )
 		{
 			LOGGER.debug( "Success Code received from Redmine Server[" + statusCode + "]" );
 			return;
 		}
+		LOGGER.debug( "isClientError[" + Status.isClientError( statusCode ) + "]" );
+		LOGGER.debug( "isInformationalError[" + Status.isInformational( statusCode ) + "]" );
+		LOGGER.debug( "isServerError[" + Status.isServerError( statusCode ) + "]" );
+		LOGGER.debug( "unauthorized[" + ( statusCode == Status.CLIENT_ERROR_UNAUTHORIZED.getCode() ) + "]" );
+		LOGGER.debug( "connectionError[" + ( statusCode == Status.CONNECTOR_ERROR_CONNECTION.getCode() ) + "]" );
+		LOGGER.debug( "communicationError[" + ( statusCode == Status.CONNECTOR_ERROR_COMMUNICATION.getCode() ) + "]" );
+
 		RCException rce = null;
 		if( statusCode == RCException.UNPROCESSABLE_ENTITY )
 		{
-			rce = new RCException(
-					statusCode,
-					"Error Status Unprocessable_Entity 422 is returned from Redmine Server. Redmine server returns this when some data is not as per expected format. For example, any specified relational data is not found. Or you have used a Priority ID, which is not there in Redmine Database. Or if any mandatory field is not specified. Or date format is not correct. Or date data is not correct",
-					outputText );
+			rce = new RCException( statusCode,
+					"Error Status Unprocessable_Entity 422 is returned from Redmine Server. "
+							+ "Redmine server returns this when some data is not as per expected format. "
+							+ "For example, any specified relational data is not found. "
+							+ "Or for example, you have used a Priority ID, which is not there in Redmine Database. "
+							+ "Or if any mandatory field is not specified. Or date format is not correct. "
+							+ "Or the id you have specified, is already been used by other object. "
+							+ "Or date data is not correct", outputText );
+		}
+		else if( Status.isConnectorError( statusCode ) )
+		{
+			rce = new RCException( statusCode,
+					"Error in connection with Redmine Server. Check URL, or Redmine Server if it is running or not. status["
+							+ restRequestStatus + "] serverError[" + ( Status.isServerError( statusCode ) )
+							+ "] clientError[" + Status.isClientError( statusCode ) + "]" );
+		}
+		else if( statusCode == Status.CLIENT_ERROR_UNAUTHORIZED.getCode() )
+		{
+			rce = new RCException( statusCode,
+					"Authorization Error. Please check the credential passed with request. status[" + restRequestStatus
+							+ "] serverError[" + ( Status.isServerError( statusCode ) ) + "] clientError["
+							+ Status.isClientError( statusCode ) + "]" );
 		}
 		else
 		{
 			rce = new RCException( statusCode, "Error Status return from Redmine Server. status[" + restRequestStatus
-					+ "] statusCode[" + statusCode + "]" );
+					+ "] serverError[" + ( Status.isServerError( statusCode ) ) + "] clientError["
+					+ Status.isClientError( statusCode ) + "]" );
 		}
 		LOGGER.error( rce );
 		throw rce;
 	}
 
-	private String getServerAddress()
-	{
-		return serverAddress;
-	}
-
 	public static void main( String[] args ) throws Exception
 	{
-		RestletClient rc = new RestletClient( ConfigurationManager.getSharedInstance().getPropertyValue(
-				"redmine.server" ) );
-		rc.executeGetRequest( "/issues.xml" );
+		RestletClient rc = new RestletClient();
+		rc.executeGetRequest( "http://localhost:3000/issues.xml" );
 	}
 
 }
