@@ -23,7 +23,7 @@ public class Project extends RedmineBDO
 	public static String		INCLUDE_TRACKERS			= "trackers";
 	public static String		INCLUDE_ISSUE_CATEGORIES	= "issue_categories";
 
-	private Long				id;
+//	private Long				id;
 	private String				name;
 	private String				identifier;
 	private String				description;
@@ -33,15 +33,15 @@ public class Project extends RedmineBDO
 
 	private ArrayList<Tracker>	trackers;
 
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId( Long id )
-	{
-		this.id = id;
-	}
+//	public Long getId()
+//	{
+//		return id;
+//	}
+//
+//	public void setId( Long id )
+//	{
+//		this.id = id;
+//	}
 
 	public String getName()
 	{

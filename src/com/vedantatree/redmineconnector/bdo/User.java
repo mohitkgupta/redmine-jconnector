@@ -213,6 +213,7 @@ public class User
 		{
 			errors.add( "Last name is not set" );
 		}
+		// TODO: validate email format, add util method
 		if (!Utilities.isQualifiedString( email ))
 		{
 			errors.add( "Email is not set" );

@@ -35,5 +35,5 @@ Provision for passing include string for various requests, or it can be made con
 it in API
 We are supporting only API Access Key authentication. Decide, if we want to support user name and password also. However, API Access Key approach seems better.
 Support for custom fields
-Clean the binding file, use references if possible for various object mappings
+Clean the binding file, use references if possible for various object mappings - read for reusable abstract bindings
 See if we can used annotations with JIBX
