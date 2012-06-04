@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +36,8 @@ import com.vedantatree.redmineconnector.bdo.User;
 
 public class RCTestCase
 {
+
+	private static Log				LOGGER					= LogFactory.getLog( RCTestCase.class );
 
 	private RedmineConnector	redmineConnector;
 	private static int			projectIdentifer = Integer.MIN_VALUE;
@@ -183,6 +187,8 @@ public class RCTestCase
 		}
 		catch( Exception ex )
 		{
+			LOGGER.error( ex );
+			ex.printStackTrace();
 			fail( "Failed due to exception faced. Exception[" + ex.getMessage() + "]" );
 		}
 	}
@@ -213,6 +219,8 @@ public class RCTestCase
 		}
 		catch( Exception ex )
 		{
+			LOGGER.error( ex );
+			ex.printStackTrace();
 			fail( "Failed due to exception faced. Exception[" + ex.getMessage() + "]" );
 		}
 	}

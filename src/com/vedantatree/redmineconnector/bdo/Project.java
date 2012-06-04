@@ -19,6 +19,9 @@ public class Project extends RedmineBDO
 {
 
 	private static Log	LOGGER	= LogFactory.getLog( Project.class );
+	
+	public static String INCLUDE_TRACKERS = "trackers";
+	public static String INCLUDE_ISSUE_CATEGORIES = "issue_categories";
 
 	private Long		id;
 

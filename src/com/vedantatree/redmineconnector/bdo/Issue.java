@@ -19,6 +19,12 @@ public class Issue extends RedmineBDO
 {
 
 	private static Log	LOGGER				= LogFactory.getLog( Issue.class );
+	
+	public static String INCLUDE_CHILDREN = "children";
+	public static String INCLUDE_ATTACHMENTS = "attachments";
+	public static String INCLUDE_RELATIONS = "relations";
+	public static String INCLUDE_CHANGESETS = "changesets";
+	public static String INCLUDE_JOURNALS = "journals";
 
 	// TODO - check if binding.xml has mapping for all fields
 	private Long		id;

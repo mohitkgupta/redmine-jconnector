@@ -1,3 +1,0 @@
-Supports CRUD operations for Issue, except fetching the list of Issues
-Supports CRUD operations for Project, except fetching the list of Projects
-Handle Exceptions from Redmine Server and translate these to understandable format
