@@ -61,48 +61,6 @@
 			usage="optional" />
 	</mapping>
 
-	<mapping name="project" class="com.vedantatree.redmineconnector.bdo.Project"
-		ordered="false" flexible="true">
-		<value name="id" field="id" usage="optional" />
-		<value name="name" field="name" />
-		<value name="identifier" field="identifier" />
-		<value name="description" field="description" />
-		<value name="homepage" field="homePage" usage="optional" />
-		<value name="created_on" format="date-value" field="createdOn" />
-		<value name="updated_on" format="date-value" field="updatedOn" />
-
-		<collection name="trackers" field="trackers" flexible="false"
-			usage="optional">
-			<structure name="tracker"
-				type="com.vedantatree.redmineconnector.bdo.Tracker" value-style="attribute"
-				flexible="false">
-				<value name="name" field="name" />
-				<value name="id" field="id" />
-			</structure>
-		</collection>
-	</mapping>
-
-	<mapping name="projects"
-		class="com.vedantatree.redmineconnector.bdo.ProjectsContainer"
-		ordered="false" flexible="false">
-		<value name="limit" field="limit" style="attribute" />
-		<value name="total_count" field="totalCount" style="attribute" />
-		<value name="offset" field="offset" style="attribute" />
-
-		<collection field="redmineDataObjects" usage="optional"
-			ordered="false" flexible="true">
-			<structure name="project"
-				type="com.vedantatree.redmineconnector.bdo.Project">
-				<value name="id" field="id" />
-				<value name="name" field="name" />
-				<value name="identifier" field="identifier" />
-				<value name="description" field="description" />
-				<value name="created_on" format="date-value" field="createdOn" />
-				<value name="updated_on" format="date-value" field="updatedOn" />
-			</structure>
-		</collection>
-	</mapping>
-
 	<mapping name="issues"
 		class="com.vedantatree.redmineconnector.bdo.IssuesContainer" ordered="false"
 		flexible="false">
@@ -162,6 +120,75 @@
 					usage="optional" />
 				<value name="updated_on" format="date-value" field="updatedOn"
 					usage="optional" />
+			</structure>
+		</collection>
+	</mapping>
+
+	<mapping name="project" class="com.vedantatree.redmineconnector.bdo.Project"
+		ordered="false" flexible="true">
+		<value name="id" field="id" usage="optional" />
+		<value name="name" field="name" />
+		<value name="identifier" field="identifier" />
+		<value name="description" field="description" />
+		<value name="homepage" field="homePage" usage="optional" />
+		<value name="created_on" format="date-value" field="createdOn" />
+		<value name="updated_on" format="date-value" field="updatedOn" />
+
+		<collection name="trackers" field="trackers" flexible="false"
+			usage="optional">
+			<structure name="tracker"
+				type="com.vedantatree.redmineconnector.bdo.Tracker" value-style="attribute"
+				flexible="false">
+				<value name="name" field="name" />
+				<value name="id" field="id" />
+			</structure>
+		</collection>
+	</mapping>
+
+	<mapping name="projects"
+		class="com.vedantatree.redmineconnector.bdo.ProjectsContainer"
+		ordered="false" flexible="false">
+		<value name="limit" field="limit" style="attribute" />
+		<value name="total_count" field="totalCount" style="attribute" />
+		<value name="offset" field="offset" style="attribute" />
+
+		<collection field="redmineDataObjects" usage="optional"
+			ordered="false" flexible="true">
+			<structure name="project"
+				type="com.vedantatree.redmineconnector.bdo.Project">
+				<value name="id" field="id" />
+				<value name="name" field="name" />
+				<value name="identifier" field="identifier" />
+				<value name="description" field="description" />
+				<value name="created_on" format="date-value" field="createdOn" />
+				<value name="updated_on" format="date-value" field="updatedOn" />
+			</structure>
+		</collection>
+	</mapping>
+
+	<!-- TODO: custom fields are left -->
+	<mapping name="user" class="com.vedantatree.redmineconnector.bdo.User"
+		ordered="false" flexible="true">
+		<value name="id" field="id" />
+		<value name="login" field="login" />
+		<value name="firstname" field="firstName" />
+		<value name="lastname" field="lastname" />
+		<value name="mail" field="email"/>
+		<value name="created_on" format="date-value" field="createdOn" usage="optional"/>
+		<value name="last_login_on" format="date-value" field="lastLoginOn" usage="optional"/>
+		
+
+		<collection name="memberships" field="projectMemberships" flexible="false"
+			usage="optional">
+			<structure name="projectMembership"
+				type="com.vedantatree.redmineconnector.bdo.ProjectMembership"
+				flexible="false">
+				<structure name="project"
+					type="com.vedantatree.redmineconnector.bdo.Project" value-style="attribute"
+					flexible="false">
+					<value name="name" field="name" />
+					<value name="id" field="id" />
+				</structure>
 			</structure>
 		</collection>
 	</mapping>

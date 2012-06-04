@@ -3,5 +3,6 @@ Redmine Download - http://www.redmine.org/projects/redmine/wiki/Download
 Install Redmine - http://www.redmine.org/projects/redmine/wiki/RedmineInstall
 Upgrade Redmine - http://www.redmine.org/projects/redmine/wiki/RedmineUpgrade
 
+Jibx Eclipse Plugin - http://jibx.sourceforge.net/eclipse/
 
 Start Redmine in Testing >>>>> ruby script/server webrick -e production

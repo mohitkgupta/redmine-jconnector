@@ -18,34 +18,65 @@ import com.vedantatree.redmineconnector.utils.Utilities;
 public class Issue extends RedmineBDO
 {
 
-	private static Log	LOGGER				= LogFactory.getLog( Issue.class );
-	
-	public static String INCLUDE_CHILDREN = "children";
-	public static String INCLUDE_ATTACHMENTS = "attachments";
-	public static String INCLUDE_RELATIONS = "relations";
-	public static String INCLUDE_CHANGESETS = "changesets";
-	public static String INCLUDE_JOURNALS = "journals";
+	private static Log		LOGGER					= LogFactory.getLog( Issue.class );
+
+	/**
+	 * 'include' is used to fetch associated data with Issue. It is optional. Use can specify any number of include 
+	 * criteria with request as comma separated values(e.g ?include=relations,journals). 
+	 * 
+	 * Possible values: children, attachments, relations, changesets and journals. 
+	 */
+	public static String	INCLUDE_CHILDREN		= "children";
+	public static String	INCLUDE_ATTACHMENTS		= "attachments";
+	public static String	INCLUDE_RELATIONS		= "relations";
+	public static String	INCLUDE_CHANGESETS		= "changesets";
+	public static String	INCLUDE_JOURNALS		= "journals";
+
+	/**
+	 * Filter name to get issues from the project with the given id, where id is either project id or project identifier
+	 */
+	public static String	FILTER_PROJECT_ID		= "project_id";
+
+	/**
+	 * Filter name to get issues from the tracker with the given id
+	 */
+	public static String	FILTER_TRACKER_ID		= "tracker_id";
+
+	/**
+	 * Filter name to get issues with the given status id only. Possible values: open, closed, * to get open and closed issues, status id
+	 */
+	public static String	FILTER_STATUS_ID		= "status_id";
+
+	/**
+	 * Filter name to get issues which are assigned to the given user id
+	 */
+	public static String	FILTER_ASSIGNED_TO_ID	= "assigned_to_id";
+
+	/**
+	 * Filter name to get issues with the given value for custom field with an ID of x. (Custom field must have 'used as a filter' checked.)
+	 */
+	public static String	FILTER_CUSTOM_FIELD_ID	= "cf_x";
 
 	// TODO - check if binding.xml has mapping for all fields
-	private Long		id;
+	private Long			id;
 
-	private Issue		parent;
-	private String		subject;
-	private String		description;
-	private Date		startDate;
-	private Date		dueDate;
-	private User		assignedTo;
-	private User		author;
-	private Float		estimatedEfforts	= new Float( 0 );
-	private Float		spentEfforts		= new Float( 0 );
-	private Integer		percentageDone		= new Integer( 0 );
-	private Date		createdOn;
-	private Date		updatedOn;
+	private Issue			parent;
+	private String			subject;
+	private String			description;
+	private Date			startDate;
+	private Date			dueDate;
+	private User			assignedTo;
+	private User			author;
+	private Float			estimatedEfforts		= new Float( 0 );
+	private Float			spentEfforts			= new Float( 0 );
+	private Integer			percentageDone			= new Integer( 0 );
+	private Date			createdOn;
+	private Date			updatedOn;
 
-	private Project		project;
-	private Tracker		tracker;
-	private Status		status;
-	private Priority	priority;
+	private Project			project;
+	private Tracker			tracker;
+	private Status			status;
+	private Priority		priority;
 
 	// custom fields are left
 

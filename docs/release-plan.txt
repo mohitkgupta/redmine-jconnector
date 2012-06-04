@@ -5,14 +5,14 @@ Support for Basic CRUD Operations - Done
 
 
 ---------------------------------------
-1.0
+1.0.0
 ---------------------------------------
 Support for fetching the list of Issue and Project objects - Done
 Exception Handling - Done ^ Ongoing Process
 
 
 ---------------------------------------
-1.1
+1.1.0
 ---------------------------------------
 Generic Component to Build the URL for all requests - In Progress
 Support filtering parameter - In Progress
@@ -35,3 +35,5 @@ Provision for passing include string for various requests, or it can be made con
 it in API
 We are supporting only API Access Key authentication. Decide, if we want to support user name and password also. However, API Access Key approach seems better.
 Support for custom fields
+Clean the binding file, use references if possible for various object mappings
+See if we can used annotations with JIBX

@@ -95,7 +95,7 @@
 	<!-- compile and bind -->
 	<target name="build" depends="compile, bind" />
 
-	<target name="dist" depends="run-tests">
+	<target name="dist" depends="build">
 		<delete dir="${dist.dir}" />
 		<mkdir dir="${dist.dir}" />
 		<echo message="in dist folder" />
@@ -165,7 +165,7 @@
 </taskdef>
 
 <!-- Running test cases -->
-<target name="run-tests" description="Run tests and generate test summary" depends="build">
+<target name="run-tests" description="Run tests and generate test summary" depends="dist">
 
 <mkdir dir="${test.reports.dir}" />
 <!--
