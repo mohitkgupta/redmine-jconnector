@@ -78,7 +78,7 @@
 	</target>
 
 	<!-- bind as a separate step -->
-	<target name="bind" depends="check-binding">
+	<target name="bind" depends="check-binding, generate-bindings">
 
 		<echo message="Running JiBX binding compiler" />
 		<taskdef name="bind" classname="org.jibx.binding.ant.CompileTask">
@@ -86,7 +86,7 @@
 				<fileset dir="${lib.dir}" includes="*.jar" />
 			</classpath>
 		</taskdef>
-		<bind binding="${basedir}/binding.xml">
+		<bind binding="${basedir}/bindings/binding.xml">
 			<classpath refid="classpath" />
 		</bind>
 
@@ -101,6 +101,36 @@
 		<echo message="in dist folder" />
 
 		<jar jarfile="${dist.dir}/vts-redmineconnector.jar" compress="true" basedir="${build.dir}" />
+
+	</target>
+
+	<target name="generate-bindings" depends="compile">
+
+		<echo message="Running BindGen tool" />
+		<java classpathref="classpath" fork="true" failonerror="true" classname="org.jibx.binding.generator.BindGen">
+			<arg value="-s" />
+			<arg value="src" />
+			<arg value="-t" />
+			<arg value="bindings" />
+			<arg value="-n" />
+			<arg value="uri=http://www.vedantatree.com/redminejconnector" />
+			<arg value="-v" />
+			<arg value="-w" />
+			<arg value="com.vedantatree.redmineconnector.bdo.Status" />
+			<arg value="com.vedantatree.redmineconnector.bdo.Tracker" />
+			<arg value="com.vedantatree.redmineconnector.bdo.Priority" />
+			<arg value="com.vedantatree.redmineconnector.bdo.Error" />
+			<arg value="com.vedantatree.redmineconnector.bdo.ErrorsContainer" />
+			<arg value="com.vedantatree.redmineconnector.bdo.User" />
+			<arg value="com.vedantatree.redmineconnector.bdo.UsersContainer" />
+			<arg value="com.vedantatree.redmineconnector.bdo.UserGroup" />
+			<arg value="com.vedantatree.redmineconnector.bdo.UserRole" />
+			<arg value="com.vedantatree.redmineconnector.bdo.Project" />
+			<arg value="com.vedantatree.redmineconnector.bdo.ProjectsContainer" />
+			<arg value="com.vedantatree.redmineconnector.bdo.Issue" />
+			<arg value="com.vedantatree.redmineconnector.bdo.IssuesContainer" />
+			<arg value="com.vedantatree.redmineconnector.bdo.ProjectMembership" />
+		</java>
 
 	</target>
 

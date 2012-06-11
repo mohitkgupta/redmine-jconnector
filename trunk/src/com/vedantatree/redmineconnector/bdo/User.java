@@ -46,13 +46,12 @@ Response:
  * TODO: What is auth_source_id?????
  */
 
-public class User
+public class User extends RedmineBDO
 {
 
 	public static String					INCLUDE_MEMBERSHIPS	= "memberships";
 	public static String					INCLUDE_GROUPS		= "groups";
 
-	private Long							id;
 	private String							name;
 
 	private String							login;
@@ -73,17 +72,7 @@ public class User
 
 	public User( Long id )
 	{
-		this.id = id;
-	}
-
-	public Long getId()
-	{
-		return id;
-	}
-
-	public void setId( Long id )
-	{
-		this.id = id;
+		super.setId( id );
 	}
 
 	public String getName()
@@ -223,6 +212,6 @@ public class User
 
 	public String toString()
 	{
-		return "User@" + hashCode() + ": id[" + id + "] name[" + getFullName() + "]";
+		return "User@" + hashCode() + ": id[" + getId() + "] name[" + getFullName() + "]";
 	}
 }

@@ -9,20 +9,7 @@ import com.vedantatree.redmineconnector.utils.Utilities;
 public class UserGroup extends RedmineBDO
 {
 
-	private Long	id;
 	private String	name;
-
-	@Override
-	public Long getId()
-	{
-		return id;
-	}
-
-	@Override
-	public void setId( Long id )
-	{
-		this.id = id;
-	}
 
 	public String getName()
 	{
@@ -53,7 +40,7 @@ public class UserGroup extends RedmineBDO
 
 	public String toString()
 	{
-		return "UserGroup@" + hashCode() + ": id[" + id + "] name[" + name + "]";
+		return "UserGroup@" + hashCode() + ": id[" + getId() + "] name[" + name + "]";
 	}
 
 }

@@ -1,3 +1,6 @@
 jibx - 1.2.4 - http://jibx.sourceforge.net/
 jibx eclipse plugin - http://jibx.sourceforge.net/eclipse/
 junit - 4.1
+commons-logging - 1.1
+log4j - 1.2.9
+Restlet - 2.0.14 - http://www.restlet.org/downloads/stable
