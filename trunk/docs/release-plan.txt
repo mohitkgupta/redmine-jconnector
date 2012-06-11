@@ -20,21 +20,3 @@ Support filtering parameter - In Progress
 Support Includes parameter - In Progress
 Work for Users
 Test Cases for all above implementation
-
-
----------------------------------------
-Product Backlog
----------------------------------------
-Work for time entries
-Support for other Redmine objects
-More extensive error handling
-Work for journal and attachments
-Work for News
-Work for versions - roadmap
-Design URL Creator - A object to encapsulate the logic of URL formation for all kind of requests
-Provision for passing include string for various requests, or it can be made configurable using XML. Better to provide 
-it in API
-We are supporting only API Access Key authentication. Decide, if we want to support user name and password also. However, API Access Key approach seems better.
-Support for custom fields
-Clean the binding file, use references if possible for various object mappings - read for reusable abstract bindings
-See if we can used annotations with JIBX
