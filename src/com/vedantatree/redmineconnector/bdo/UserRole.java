@@ -10,20 +10,7 @@ import com.vedantatree.redmineconnector.utils.Utilities;
 public class UserRole extends RedmineBDO
 {
 
-	private Long	id;
 	private String	name;
-
-	@Override
-	public Long getId()
-	{
-		return id;
-	}
-
-	@Override
-	public void setId( Long id )
-	{
-		this.id = id;
-	}
 
 	public String getName()
 	{
@@ -54,7 +41,7 @@ public class UserRole extends RedmineBDO
 
 	public String toString()
 	{
-		return "UserRole@" + hashCode() + ": id[" + id + "] name[" + name + "]";
+		return "UserRole@" + hashCode() + ": id[" + getId() + "] name[" + name + "]";
 	}
 
 }

@@ -9,6 +9,7 @@ Support for Basic CRUD Operations - Done
 ---------------------------------------
 Support for fetching the list of Issue and Project objects - Done
 Exception Handling - Done ^ Ongoing Process
+Stable than earlier, with better testing controls
 
 
 ---------------------------------------
@@ -17,7 +18,6 @@ Exception Handling - Done ^ Ongoing Process
 Generic Component to Build the URL for all requests - In Progress
 Support filtering parameter - In Progress
 Support Includes parameter - In Progress
-Work for time entries
 Work for Users
 Test Cases for all above implementation
 
@@ -25,6 +25,7 @@ Test Cases for all above implementation
 ---------------------------------------
 Product Backlog
 ---------------------------------------
+Work for time entries
 Support for other Redmine objects
 More extensive error handling
 Work for journal and attachments
