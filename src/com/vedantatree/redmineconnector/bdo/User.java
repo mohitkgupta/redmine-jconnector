@@ -13,35 +13,21 @@ import com.vedantatree.redmineconnector.utils.Utilities;
  */
 
 /*
- * POST
-Creates a user.
-
-Parameters:
-
-user (required): a hash of the user attributes, including:
-login (required): the user login
-password: the user password
-firstname (required)
-lastname (required)
-mail (required)
-auth_source_id: authentication mode id
-Example:
-
-POST /users.xml
-
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<user>
-  <login>jplang</login>
-  <firstname>Jean-Philippe</firstname>
-  <lastname>Lang</lastname>
-  <password>secret</password>
-  <mail>jp_lang@yahoo.fr</mail>
-  <auth_source_id>2</auth_source_id>
-</user>
-Response:
-
-201 Created: user was created
-422 Unprocessable Entity: user was not created due to validation failures (response body contains the error messages)
+ * POST Creates a user.
+ * 
+ * Parameters:
+ * 
+ * user (required): a hash of the user attributes, including: login (required): the user login password: the user
+ * password firstname (required) lastname (required) mail (required) auth_source_id: authentication mode id Example:
+ * 
+ * POST /users.xml
+ * 
+ * <?xml version="1.0" encoding="ISO-8859-1" ?> <user> <login>jplang</login> <firstname>Jean-Philippe</firstname>
+ * <lastname>Lang</lastname> <password>secret</password> <mail>jp_lang@yahoo.fr</mail>
+ * <auth_source_id>2</auth_source_id> </user> Response:
+ * 
+ * 201 Created: user was created 422 Unprocessable Entity: user was not created due to validation failures (response
+ * body contains the error messages)
  * 
  * TODO: What is auth_source_id?????
  */
@@ -49,18 +35,18 @@ Response:
 public class User extends RedmineBDO
 {
 
-	public static String					INCLUDE_MEMBERSHIPS	= "memberships";
-	public static String					INCLUDE_GROUPS		= "groups";
-
-	private String							name;
+	public static String					INCLUDE_MEMBERSHIPS			= "memberships";
+	public static String					INCLUDE_GROUPS				= "groups";
 
 	private String							login;
 
-	// Security Concern: Password should not be set while retrieving the object. It should be used only to create the user.
+	// Security Concern: Password should not be set while retrieving the object. It should be used only to create the
+	// user.
 	private String							password;
 	private String							firstName;
 	private String							lastName;
 	private String							email;
+	private int								authenticationSourceType	= -1;
 	private Date							createdOn;
 	private Date							lastLoginOn;
 	private ArrayList<ProjectMembership>	projectMemberships;
@@ -70,19 +56,16 @@ public class User extends RedmineBDO
 	{
 	}
 
-	public User( Long id )
+	private Long	id;
+
+	public Long getId()
 	{
-		super.setId( id );
+		return id;
 	}
 
-	public String getName()
+	public void setId( Long id )
 	{
-		return name;
-	}
-
-	public void setName( String name )
-	{
-		this.name = name;
+		this.id = id;
 	}
 
 	public String getLogin()
@@ -135,6 +118,16 @@ public class User extends RedmineBDO
 		this.email = email;
 	}
 
+	public int getAuthenticationSourceType()
+	{
+		return authenticationSourceType;
+	}
+
+	public void setAuthenticationSourceType( int authenticationSourceType )
+	{
+		this.authenticationSourceType = authenticationSourceType;
+	}
+
 	public Date getCreatedOn()
 	{
 		return createdOn;
@@ -177,11 +170,7 @@ public class User extends RedmineBDO
 
 	public String getFullName()
 	{
-		if( Utilities.isQualifiedString( firstName ) )
-		{
-			return firstName + " " + lastName;
-		}
-		return name;
+		return firstName + " " + lastName;
 	}
 
 	public List<String> validate( List<String> errors )
@@ -190,22 +179,33 @@ public class User extends RedmineBDO
 		{
 			errors = new ArrayList<String>();
 		}
+		// if( getId() == null )
+		// {
+		// errors.add( "User Id is null" );
+		// }
 		if( getId() == null )
 		{
-			errors.add( "User's Id is null" );
-		}
-		if (!Utilities.isQualifiedString( firstName ))
-		{
-			errors.add( "First name is not set" );
-		}
-		if (!Utilities.isQualifiedString( lastName ))
-		{
-			errors.add( "Last name is not set" );
-		}
-		// TODO: validate email format, add util method
-		if (!Utilities.isQualifiedString( email ))
-		{
-			errors.add( "Email is not set" );
+			if( !Utilities.isQualifiedString( firstName ) )
+			{
+				errors.add( "First name is not set" );
+			}
+			if( !Utilities.isQualifiedString( lastName ) )
+			{
+				errors.add( "Last name is not set" );
+			}
+			if( !Utilities.isQualifiedString( password ) )
+			{
+				errors.add( "Password is not set" );
+			}
+			if( authenticationSourceType == -1 )
+			{
+				errors.add( "Authentication Source Type is not set" );
+			}
+			// TODO: validate email format, add util method
+			if( !Utilities.isQualifiedString( email ) )
+			{
+				errors.add( "Email is not set" );
+			}
 		}
 		return errors;
 	}

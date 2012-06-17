@@ -19,7 +19,7 @@ import com.vedantatree.redmineconnector.bdo.RedmineBDO;
 public interface RedmineDataPaginator
 {
 
-	static int			REDMINE_MAX_PAGE_SIZE	= 100;
+	static int	REDMINE_MAX_PAGE_SIZE	= 100;
 
 	/**
 	 * It returns the number of records for one page.

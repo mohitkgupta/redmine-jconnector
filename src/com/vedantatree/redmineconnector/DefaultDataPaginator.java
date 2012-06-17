@@ -22,7 +22,7 @@ import com.vedantatree.redmineconnector.utils.Utilities;
 public class DefaultDataPaginator implements RedmineDataPaginator
 {
 
-	private static Log	LOGGER					= LogFactory.getLog( DefaultDataPaginator.class );
+	private static Log	LOGGER				= LogFactory.getLog( DefaultDataPaginator.class );
 
 	/**
 	 * It represents the type of RedmineBDO which this paginator will return for every user request.
@@ -41,7 +41,7 @@ public class DefaultDataPaginator implements RedmineDataPaginator
 	 * <p>
 	 * Alternatively, user can use 'getAllRecords' method to fetch all the records.
 	 */
-	private int			pageSize				= 25;
+	private int			pageSize			= 25;
 
 	/**
 	 * It is the index of start page. Pagination component will fetch the data starting from this page. It will be set
@@ -61,7 +61,7 @@ public class DefaultDataPaginator implements RedmineDataPaginator
 	 * of projects exist in Redmine. However, total number of records returned in one 'getNextPageRecords' method are
 	 * dependent on 'pageSize' attribute.
 	 */
-	private long		totalRecordCount		= Long.MIN_VALUE;
+	private long		totalRecordCount	= Long.MIN_VALUE;
 
 	/**
 	 * Redmine URL for calling restlet service

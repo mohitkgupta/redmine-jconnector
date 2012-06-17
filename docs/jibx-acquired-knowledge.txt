@@ -1,0 +1,20 @@
+Jibx Acquired Knowledge
+
+- If any required property is null, jibx may throw null pointer while marshaling. For example, if Project's id is configured as required and it is null.
+
+- Jibx show error message like, expected tag is <...> and found <...> if,
+-- Value style attribute is wrong
+-- If you forgot to give the name of structure in a mapping and it was expected there
+-- If Jibx is unable to resolve the values from mapped (map-as) structure due to any reason
+
+- You can not use an abstract mapping as structure even if corresponding class is concrete. Jibx expect that if mapping 
+is defined abstract, then the run time mapping object should be inherited from this abstract mapping class. If it is 
+same class object, jibx will throw error. For example, You have Project and its Super class as 'CompactProject'. You 
+have defined mapping for CompactProject as abstract and extends Project mapping from CompactProject Mapping. Now Issue
+object and mapping has reference of CompactProject. So if you try to use CompactProject mapping as structure inside 
+mapping of Issue, and runtime object is also of CompactProject type, jibx will give error that Runtime object should be 
+bind with some extending class of CompactProject.
+
+-We also face problem in following scenario. Like Project default mapping is having 'element' value style. But if we 
+want to use this mapping in inside structure of Issue, where value style will be 'attribute'. It wont work even if we 
+set the value style as attribute with that structure. Refer to RedmineBDO object java comments for more detail.  

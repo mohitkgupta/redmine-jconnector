@@ -13,7 +13,6 @@ import org.restlet.data.Protocol;
 import org.restlet.data.Status;
 import org.restlet.representation.Representation;
 
-import com.vedantatree.redmineconnector.utils.ConfigurationManager;
 import com.vedantatree.redmineconnector.utils.Utilities;
 
 

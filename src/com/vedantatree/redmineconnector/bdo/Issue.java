@@ -21,10 +21,10 @@ public class Issue extends RedmineBDO
 	private static Log		LOGGER					= LogFactory.getLog( Issue.class );
 
 	/**
-	 * 'include' is used to fetch associated data with Issue. It is optional. Use can specify any number of include 
-	 * criteria with request as comma separated values(e.g ?include=relations,journals). 
+	 * 'include' is used to fetch associated data with Issue. It is optional. Use can specify any number of include
+	 * criteria with request as comma separated values(e.g ?include=relations,journals).
 	 * 
-	 * Possible values: children, attachments, relations, changesets and journals. 
+	 * Possible values: children, attachments, relations, changesets and journals.
 	 */
 	public static String	INCLUDE_CHILDREN		= "children";
 	public static String	INCLUDE_ATTACHMENTS		= "attachments";
@@ -43,7 +43,8 @@ public class Issue extends RedmineBDO
 	public static String	FILTER_TRACKER_ID		= "tracker_id";
 
 	/**
-	 * Filter name to get issues with the given status id only. Possible values: open, closed, * to get open and closed issues, status id
+	 * Filter name to get issues with the given status id only. Possible values: open, closed, * to get open and closed
+	 * issues, status id
 	 */
 	public static String	FILTER_STATUS_ID		= "status_id";
 
@@ -53,12 +54,10 @@ public class Issue extends RedmineBDO
 	public static String	FILTER_ASSIGNED_TO_ID	= "assigned_to_id";
 
 	/**
-	 * Filter name to get issues with the given value for custom field with an ID of x. (Custom field must have 'used as a filter' checked.)
+	 * Filter name to get issues with the given value for custom field with an ID of x. (Custom field must have 'used as
+	 * a filter' checked.)
 	 */
 	public static String	FILTER_CUSTOM_FIELD_ID	= "cf_x";
-
-	// TODO - check if binding.xml has mapping for all fields
-	private Long			id;
 
 	private Issue			parent;
 	private String			subject;
@@ -79,6 +78,8 @@ public class Issue extends RedmineBDO
 	private Priority		priority;
 
 	// custom fields are left
+
+	private Long			id;
 
 	public Long getId()
 	{
@@ -313,10 +314,11 @@ public class Issue extends RedmineBDO
 	{
 		if( LOGGER.isDebugEnabled() )
 		{
-			return "Issue@" + hashCode() + ": id[" + getId() + "] subject[" + subject + "] startDate[" + startDate
+			return "Issue@" + hashCode() + ": id[" + getId() + "] subject[" + subject + "] project["
+					+ ( project != null ? project.getId() + "<id" : project.getId() + "" ) + "] startDate[" + startDate
 					+ "] endDate[" + dueDate + "] estimateEfforts[" + estimatedEfforts + "] spentEfforts["
-					+ spentEfforts + "] percentageDone[" + percentageDone + "] assignedTo[" + assignedTo
-					+ "] createdOn[" + createdOn + "] updatedOn[" + updatedOn + "] author[" + author + "]";
+					+ spentEfforts + "] percentageDone[" + percentageDone + "] createdOn[" + createdOn + "] updatedOn["
+					+ updatedOn + "] assignedTo[" + assignedTo + "] author[" + author + "]";
 		}
 		return "Issue@" + hashCode() + ": id[" + getId() + "]";
 	}
