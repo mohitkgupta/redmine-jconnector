@@ -74,6 +74,9 @@
 				<include name="**/*.xml" />
 				<include name="**/*.properties" />
 			</fileset>
+			<fileset dir="${basedir}">
+				<include name="binding.xml" />
+			</fileset>
 		</copy>
 	</target>
 
@@ -97,8 +100,7 @@
 	<target name="build" depends="compile, bind" />
 
 	<target name="dist" depends="build">
-		<delete dir="${dist.dir}" />
-		<mkdir dir="${dist.dir}" />
+		<delete file="${dist.dir}/vts-redmineconnector.jar" />
 		<echo message="in dist folder" />
 
 		<jar jarfile="${dist.dir}/vts-redmineconnector.jar" compress="true" basedir="${build.dir}" />
@@ -159,7 +161,7 @@
 		<echo message="Generated output document out.xml" />
 	</target>
 
-	<target name="javadoc" description="Generates RedmineJConnector Javadocs" depends="build">
+	<target name="javadoc" description="Generates RedmineJConnector Javadocs" depends="dist">
 		<echo message="in javadoc" />
 		<echo message="${javadoc.dir}" />
 		<delete dir="${javadoc.dir}" failonerror="false" />
@@ -173,9 +175,8 @@
 			<doctitle>
 				<![CDATA[<h1>RedmineJConnector</h1>]]></doctitle>
 		<bottom>
-			<![CDATA[<i>Copyright &#169; 2011 VedantaTree Organization. All Rights Reserved.</i>]]></bottom>
+			<![CDATA[<i>Copyright &#169; 2012 VedantaTree Organization. All Rights Reserved.</i>]]></bottom>
 
-	<link href="http://java.sun.com/j2ee/1.4/docs/api" />
 	<link href="http://www.junit.org/junit/javadoc/" />
 	<link href="http://logging.apache.org/log4j/docs/api/" />
 	<link href="http://jibx.sourceforge.net/" />

@@ -1,0 +1,30 @@
+What and Where:
+------------------------
+API jar File - Under dist folder
+API Java Documentation - Under javadocs folder
+Dependencies/Libraries - Under lib folder
+License Information - In license.txt file
+Reference Implementation - Refer to test cases bundled with source code. You can get the source code from SVN repository
+
+How to Run:
+------------------------
+Get the vts-redmineconnector.jar from dist folder
+Get libraries from lib folder
+Add these to your project libraries
+Have redmine-connector.properties in classpath at root 
+Set the properties in redmine-connector.properties file for server address and security key
+With latest version, you can specify these properties while initiating the instance of RedmineConnector class in constructor
+Use the API
+For reference implementation, refer to test cases bundled with source code
+
+How to Build:
+------------------------
+Check out source code from SVN
+Build the System using build.xml. It is ANT based build
+Use javadoc target in build file to generate the latest Java Documentation
+Use dist for building the jar file
+
+Points to Consider:
+------------------------
+Application is current tested on Java 6. 
+If you are trying to build it on Java 5, it may require some more jar files for XML parsing like Stax and Pull parsers.
