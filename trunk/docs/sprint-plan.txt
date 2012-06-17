@@ -13,3 +13,5 @@ sprint - 18-06-2012 <> 24-06-2012
 ---------------------------------------
 Test Cases for all above implementation
 Extensive Testing and Bug Fixing
+Test with Redmine 2.0+
+Create Wiki pages for project and give links at home page
