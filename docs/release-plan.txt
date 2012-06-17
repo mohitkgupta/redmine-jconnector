@@ -20,3 +20,4 @@ Support filtering parameter - In Progress
 Support Includes parameter - In Progress
 Work for Users
 Test Cases for all above implementation
+Test with Redmine 2+
