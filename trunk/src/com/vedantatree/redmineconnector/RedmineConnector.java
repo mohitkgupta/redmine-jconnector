@@ -483,7 +483,7 @@ public class RedmineConnector
 	 * @throws RCException if there is any problem
 	 * @since 1.1.0
 	 */
-	public void updateUser( Project updatedUser ) throws RCException
+	public void updateUser( User updatedUser ) throws RCException
 	{
 		LOGGER.trace( "updateUser: chanegdUser[" + updatedUser + "]" );
 		Utilities.assertNotNullArgument( updatedUser, "updatedUser" );
@@ -507,6 +507,11 @@ public class RedmineConnector
 	 * @throws RCException If there is any problem
 	 * @since 1.1.0
 	 */
+	// TODO: There should be a check if specified user id refers to an Administrator. In that case, code should fetch
+	// the user data from Redmine first for given id and then should check whether it is administrator or not. However,
+	// redmine does not provide administrator property with user data as of now. We should track in future releases. If
+	// we get it, then in case of admin, user should specify other parameter also which tells us that user is aware that
+	// given user id is for administrator. Otherwise, deleting the admin user can create problem.
 	public boolean deleteUser( long userId ) throws RCException
 	{
 		LOGGER.trace( "deleteUser: userId[" + userId + "]" );
@@ -531,7 +536,7 @@ public class RedmineConnector
 	 * @throws RCException If there is any problem
 	 * @since 1.1.0
 	 */
-	public Project getUserById( long userId, Collection<String> includes ) throws RCException
+	public User getUserById( long userId, Collection<String> includes ) throws RCException
 	{
 		LOGGER.trace( "getUserById: userId[" + userId + "]" );
 
@@ -540,7 +545,7 @@ public class RedmineConnector
 		try
 		{
 			String requestURL = urlBuilder.buildURLToGetObjectById( User.class, userId, includes );
-			return (Project) getRedmineObject( requestURL, User.class );
+			return (User) getRedmineObject( requestURL, User.class );
 		}
 		catch( Exception ex )
 		{
@@ -570,8 +575,8 @@ public class RedmineConnector
 								+ RedmineDataPaginator.REDMINE_MAX_PAGE_SIZE + "]" );
 			}
 
-			return new DefaultDataPaginator( ProjectsContainer.class, urlBuilder.buildURLToGetObjectsList(
-					User.class, includes, filterCritera ), startRecordIndex, pageSize );
+			return new DefaultDataPaginator( ProjectsContainer.class, urlBuilder.buildURLToGetObjectsList( User.class,
+					includes, filterCritera ), startRecordIndex, pageSize );
 		}
 		catch( Exception ex )
 		{

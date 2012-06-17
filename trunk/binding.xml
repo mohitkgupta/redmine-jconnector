@@ -17,37 +17,69 @@
 
 	<mapping class="com.vedantatree.redmineconnector.bdo.RedmineBDO"
 		abstract="true">
-		<value name="id" field="id" usage="optional" />
+		<!--
+			have to remove it as if type name is specified, the extend does not
+			recognize the fully qualified name as well as type name both.
+			However, if type name is removed, it at least recognized fully
+			qualified class name. And if we remove type name, we need to use the
+			fully qualified name in structure > map-as also.
+
+			type-name="RedmineBDO"
+		-->
+
+		<!--
+			commented, refer to RedmineBDO class java comments for reason value
+			name="id" field="id" get-method="getId" set-method="setId"
+			usage="optional" />
+		-->
 	</mapping>
 
 	<mapping name="issue" class="com.vedantatree.redmineconnector.bdo.Issue"
-		ordered="false" flexible="true">
+		extends="com.vedantatree.redmineconnector.bdo.RedmineBDO">
+
+		<!--
+			structure map-as="com.vedantatree.redmineconnector.bdo.RedmineBDO" />
+		-->
+
 		<value name="id" field="id" usage="optional" />
 
-		<structure name="project" map-as="compact-project" />
+		<!--
+
+			were trying to map as "compact project", but jibx gives error as
+			"Binding has not mapping that extends compactProject" Hence we change
+			it as following.
+		-->
+		<structure name="project" field="project" value-style="attribute">
+			<value name="name" field="name" style="attribute" />
+			<value name="id" field="id" style="attribute" />
+		</structure>
+
 		<structure name="tracker" field="tracker" value-style="attribute"
 			usage="optional">
 			<value name="id" field="id" />
 			<value name="name" field="name" />
 		</structure>
+
 		<structure name="status" field="status" value-style="attribute"
 			usage="optional">
 			<value name="id" field="id" />
 			<value name="name" field="name" />
 		</structure>
+
 		<structure name="priority" field="priority" value-style="attribute">
 			<value name="id" field="id" />
 			<value name="name" field="name" usage="optional" />
 		</structure>
-		<structure name="author" field="author" value-style="attribute"
-			usage="optional">
-			<value name="id" field="id" />
-			<value name="name" field="name" />
+
+		<structure name="author" field="author" value-style="attribute">
+			<value name="name" field="firstName" />
+			<value name="id" field="id" style="attribute" />
 		</structure>
+
 		<structure name="assigned_to" field="assignedTo"
-			value-style="attribute" usage="optional">
-			<value name="id" field="id" />
-			<value name="name" field="name" />
+			value-style="attribute">
+			<value name="name" field="firstName" />
+			<value name="id" field="id" style="attribute" />
 		</structure>
 
 		<value name="subject" field="subject" />
@@ -61,7 +93,6 @@
 			format="float-value" />
 		<value name="spent_hours" field="spentEfforts" usage="optional"
 			format="float-value" />
-
 		<value name="created_on" format="date-value" field="createdOn"
 			usage="optional" />
 		<value name="updated_on" format="date-value" field="updatedOn"
@@ -69,8 +100,7 @@
 	</mapping>
 
 	<mapping name="issues"
-		class="com.vedantatree.redmineconnector.bdo.IssuesContainer" ordered="false"
-		flexible="false">
+		class="com.vedantatree.redmineconnector.bdo.IssuesContainer" ordered="false">
 		<value name="limit" field="limit" style="attribute" />
 		<value name="total_count" field="totalCount" style="attribute" />
 		<value name="offset" field="offset" style="attribute" />
@@ -81,36 +111,30 @@
 	</mapping>
 
 	<mapping name="project" class="com.vedantatree.redmineconnector.bdo.Project"
-		extends="com.vedantatree.redmineconnector.bdo.RedmineBDO" ordered="false"
-		flexible="true">
-		<structure map-as="redminebdo"/>
-		<value name="name" field="name" />
-		<value name="identifier" field="identifier" />
-		<value name="description" field="description" />
-		<value name="homepage" field="homePage" usage="optional" />
-		<value name="created_on" format="date-value" field="createdOn" />
-		<value name="updated_on" format="date-value" field="updatedOn" />
+		extends="com.vedantatree.redmineconnector.bdo.RedmineBDO">
 
-		<collection name="trackers" field="trackers" flexible="false"
-			usage="optional">
+		<value name="id" field="id" usage="optional" />
+		<value name="name" field="name" />
+
+		<value name="identifier" field="identifier" usage="optional" />
+		<value name="description" field="description" usage="optional" />
+		<value name="homepage" field="homePage" usage="optional" />
+		<value name="created_on" format="date-value" field="createdOn"
+			usage="optional" />
+		<value name="updated_on" format="date-value" field="updatedOn"
+			usage="optional" />
+
+		<collection name="trackers" field="trackers" usage="optional">
 			<structure name="tracker"
-				type="com.vedantatree.redmineconnector.bdo.Tracker" value-style="attribute"
-				flexible="false">
+				type="com.vedantatree.redmineconnector.bdo.Tracker" value-style="attribute">
 				<value name="name" field="name" />
 				<value name="id" field="id" />
 			</structure>
 		</collection>
 	</mapping>
 
-	<mapping class="com.vedantatree.redmineconnector.bdo.Project"
-		extends="com.vedantatree.redmineconnector.bdo.RedmineBDO" abstract="true"
-		value-style="attribute" type-name="compact-project">
-		<value name="name" field="name" />
-	</mapping>
-
 	<mapping name="projects"
-		class="com.vedantatree.redmineconnector.bdo.ProjectsContainer"
-		ordered="false" flexible="false">
+		class="com.vedantatree.redmineconnector.bdo.ProjectsContainer">
 		<value name="limit" field="limit" style="attribute" />
 		<value name="total_count" field="totalCount" style="attribute" />
 		<value name="offset" field="offset" style="attribute" />
@@ -123,12 +147,15 @@
 
 	<!-- TODO: custom fields are left -->
 	<mapping name="user" class="com.vedantatree.redmineconnector.bdo.User"
-		ordered="false" flexible="true">
-		<value name="id" field="id" />
+		extends="com.vedantatree.redmineconnector.bdo.RedmineBDO">
+		<value name="id" field="id" usage="optional" />
 		<value name="login" field="login" />
 		<value name="firstname" field="firstName" />
 		<value name="lastname" field="lastName" />
+		<value name="password" field="password" usage="optional" />
 		<value name="mail" field="email" />
+		<value name="auth_source_id" field="authenticationSourceType"
+			usage="optional" />
 		<value name="created_on" format="date-value" field="createdOn"
 			usage="optional" />
 		<value name="last_login_on" format="date-value" field="lastLoginOn"
@@ -141,15 +168,26 @@
 		</collection>
 	</mapping>
 
+	<mapping name="users"
+		class="com.vedantatree.redmineconnector.bdo.UsersContainer">
+		<value name="limit" field="limit" style="attribute" />
+		<value name="total_count" field="totalCount" style="attribute" />
+		<value name="offset" field="offset" style="attribute" />
+
+		<collection field="redmineDataObjects" usage="optional"
+			ordered="false" flexible="true">
+			<structure type="com.vedantatree.redmineconnector.bdo.User" />
+		</collection>
+	</mapping>
+
 	<mapping name="role" class="com.vedantatree.redmineconnector.bdo.UserRole"
-		ordered="false" flexible="true" value-style="attribute">
+		extends="com.vedantatree.redmineconnector.bdo.RedmineBDO" value-style="attribute">
+		<structure map-as="com.vedantatree.redmineconnector.bdo.RedmineBDO" />
 		<value name="name" field="name" />
-		<value name="id" field="id" />
 	</mapping>
 
 	<mapping name="membership"
-		class="com.vedantatree.redmineconnector.bdo.ProjectMembership"
-		flexible="true" ordered="false">
+		class="com.vedantatree.redmineconnector.bdo.ProjectMembership">
 		<structure field="project" />
 		<collection name="roles" field="roles" flexible="false">
 			<structure type="com.vedantatree.redmineconnector.bdo.UserRole" />
@@ -157,8 +195,7 @@
 	</mapping>
 
 	<mapping name="errors"
-		class="com.vedantatree.redmineconnector.bdo.ErrorsContainer" ordered="false"
-		flexible="false">
+		class="com.vedantatree.redmineconnector.bdo.ErrorsContainer">
 
 		<collection field="errors" usage="optional" ordered="false"
 			flexible="true">

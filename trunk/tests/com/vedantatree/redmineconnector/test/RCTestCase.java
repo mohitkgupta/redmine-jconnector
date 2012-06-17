@@ -33,34 +33,39 @@ import com.vedantatree.redmineconnector.bdo.User;
  * 
  * @author Mohit Gupta <mohit.gupta@vedantatree.com>
  */
-
+/*
+ * TODO - Separate Project and Issue test cases in separate classes
+ */
 public class RCTestCase
 {
 
-	private static Log				LOGGER					= LogFactory.getLog( RCTestCase.class );
+	private static Log			LOGGER				= LogFactory.getLog( RCTestCase.class );
 	/**
 	 * Default value for User. It is corresponding to Default value in Redmine. If anyone has created new objects, then
 	 * these values may vary
 	 * 
 	 * For testing purpose only
 	 * */
-	public static User		REDMINE_ADMIN		= new User( new Long( 1 ) );
-
-
+	public static User			REDMINE_ADMIN		= null;
 
 	private RedmineConnector	redmineConnector;
-	private static int			projectIdentifer = Integer.MIN_VALUE;
+	private static int			projectIdentifer	= Integer.MIN_VALUE;
 
 	@Before
 	public void setUp() throws Exception
 	{
+		// TODO clean all redmine data
 		redmineConnector = RedmineConnector.getSharedInstance();
+		REDMINE_ADMIN = new User();
+		REDMINE_ADMIN.setId( new Long( 1 ) );
+		REDMINE_ADMIN.setFirstName( "admin" );
 		projectIdentifer = 1;
 	}
 
 	@After
 	public void tearDown() throws Exception
 	{
+		// TODO clean all redmine data
 		redmineConnector = null;
 		projectIdentifer = Integer.MIN_VALUE;
 	}
@@ -349,6 +354,7 @@ public class RCTestCase
 				}
 				catch( RCException e )
 				{
+					// TODO: this error does not fail the test case being in different thread. Do something.
 					fail( e.getMessage() );
 				}
 			}
@@ -376,6 +382,7 @@ public class RCTestCase
 				}
 				catch( RCException e )
 				{
+					// TODO: this error does not fail the test case being in different thread. Do something.
 					fail( e.getMessage() );
 				}
 			}

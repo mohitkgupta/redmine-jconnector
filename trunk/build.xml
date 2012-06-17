@@ -78,7 +78,7 @@
 	</target>
 
 	<!-- bind as a separate step -->
-	<target name="bind" depends="check-binding, generate-bindings">
+	<target name="bind" depends="check-binding">
 
 		<echo message="Running JiBX binding compiler" />
 		<taskdef name="bind" classname="org.jibx.binding.ant.CompileTask">
@@ -86,7 +86,8 @@
 				<fileset dir="${lib.dir}" includes="*.jar" />
 			</classpath>
 		</taskdef>
-		<bind binding="${basedir}/bindings/binding.xml">
+		<!--bind binding="${basedir}/bindings/binding.xml"-->
+		<bind binding="${basedir}/binding.xml">
 			<classpath refid="classpath" />
 		</bind>
 
