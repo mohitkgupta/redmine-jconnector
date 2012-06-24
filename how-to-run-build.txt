@@ -23,6 +23,7 @@ Check out source code from SVN
 Build the System using build.xml. It is ANT based build
 Use javadoc target in build file to generate the latest Java Documentation
 Use dist for building the jar file
+Use run-tests for testing the project
 
 Points to Consider:
 ------------------------
