@@ -197,20 +197,20 @@ public class RestletClient
 			rce = new RCException( statusCode,
 					"Error in connection with Redmine Server. Check URL, or Redmine Server if it is running or not. status["
 							+ restRequestStatus + "] serverError[" + ( Status.isServerError( statusCode ) )
-							+ "] clientError[" + Status.isClientError( statusCode ) + "]" );
+							+ "] clientError[" + Status.isClientError( statusCode ) + "]", outputText );
 		}
 		else if( statusCode == Status.CLIENT_ERROR_UNAUTHORIZED.getCode() )
 		{
 			rce = new RCException( statusCode,
 					"Authorization Error. Please check the credential passed with request. status[" + restRequestStatus
 							+ "] serverError[" + ( Status.isServerError( statusCode ) ) + "] clientError["
-							+ Status.isClientError( statusCode ) + "]" );
+							+ Status.isClientError( statusCode ) + "]", outputText );
 		}
 		else
 		{
-			rce = new RCException( statusCode, "Error Status return from Redmine Server. status[" + restRequestStatus
+			rce = new RCException( statusCode, "Error Status returned from Redmine Server. status[" + restRequestStatus
 					+ "] serverError[" + ( Status.isServerError( statusCode ) ) + "] clientError["
-					+ Status.isClientError( statusCode ) + "]" );
+					+ Status.isClientError( statusCode ) + "]", outputText );
 		}
 		LOGGER.error( rce );
 		throw rce;

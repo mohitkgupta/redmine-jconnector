@@ -12,7 +12,7 @@ import com.vedantatree.redmineconnector.utils.Utilities;
 
 /**
  * 
- * @author Mohit Gupta <mohit.gupta@vedantatree.com>
+ * @author Mohit Gupta [mohit.gupta@vedantatree.com]
  */
 
 public class Issue extends RedmineBDO

@@ -1,16 +1,34 @@
 ---------------------------------------
-Product Backlog
+**Product Backlog**
 ---------------------------------------
 Work for time entries
-Support for other Redmine objects
-More extensive error handling
-Work for journal and attachments
-Work for News
-Work for versions - roadmap
-Design URL Creator - A object to encapsulate the logic of URL formation for all kind of requests
-Provision for passing include string for various requests, or it can be made configurable using XML. Better to provide 
-it in API
+Testing with Redmine 2+
+
+Support Issues Categories with Projects
+Support journal, attachments, children, attachments, relations, changesets and custom fields etc with Issue
+Support for Attachments
+Support for Project Memberships
+Support for Issue Relations
+Support for Versions
+Support for Queries
+Support for Trackers
+Support for Issue Categories
+Support for Roles
+Support for Groups
+Support for News
+
 We are supporting only API Access Key authentication. Decide, if we want to support user name and password also. However, API Access Key approach seems better.
-Support for custom fields
-Clean the binding file, use references if possible for various object mappings - read for reusable abstract bindings
 See if we can used annotations with JIBX
+Review of error handling
+
+--------------------------------
+**Achieved or Planned**
+--------------------------------
+Already achieved or Planned stories can be found with Release Plan and Sprint Plan
+
+--------------------------------
+**Deferred**
+--------------------------------
+
+Clean the binding file, use references if possible for various object mappings - read for reusable abstract bindings
+-- Because Jibx was not support some cleaning activities

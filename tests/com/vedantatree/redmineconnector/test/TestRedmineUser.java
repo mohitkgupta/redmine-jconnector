@@ -1,11 +1,9 @@
 package com.vedantatree.redmineconnector.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.fail;
 
-import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,18 +20,17 @@ import com.vedantatree.redmineconnector.bdo.RedmineBDO;
 import com.vedantatree.redmineconnector.bdo.User;
 
 
+/**
+ * Test case for RedmineConnector User API
+ * 
+ * 
+ * @author Mohit Gupta [mohit.gupta@vedantatree.com]
+ * @since 1.1.0
+ */
 public class TestRedmineUser
 {
 
-	private static Log			LOGGER			= LogFactory.getLog( RCTestCase.class );
-	/**
-	 * Default value for User. It is corresponding to Default value in Redmine. If anyone has created new objects, then
-	 * these values may vary
-	 * 
-	 * For testing purpose only
-	 * */
-	private static User			REDMINE_ADMIN	= null;
-	private static int			USER_ID			= 0;
+	private static Log			LOGGER	= LogFactory.getLog( TestRedmineProjects.class );
 
 	private RedmineConnector	redmineConnector;
 
@@ -42,10 +39,6 @@ public class TestRedmineUser
 	{
 		// TODO clean all redmine data
 		redmineConnector = RedmineConnector.getSharedInstance();
-		REDMINE_ADMIN = new User();
-		REDMINE_ADMIN.setId( new Long( 1 ) );
-		REDMINE_ADMIN.setFirstName( "admin" );
-		USER_ID = 0;
 	}
 
 	@After
@@ -53,7 +46,6 @@ public class TestRedmineUser
 	{
 		// TODO clean all redmine data
 		redmineConnector = null;
-		USER_ID = 0;
 
 		// write a class for data cleaning, like all projects, users, issues etc
 	}
@@ -61,20 +53,20 @@ public class TestRedmineUser
 	@Test
 	public void testUserCRUD() throws Exception
 	{
-		User newUser = newUserInstance();
+		User newUser = TestUtils.newUserInstance();
 		User createdUser = null;
 		try
 		{
 			createdUser = redmineConnector.createUser( newUser );
-			checkUserData( newUser, createdUser );
+			TestUtils.checkUserData( newUser, createdUser );
 
 			createdUser = redmineConnector.getUserById( createdUser.getId(), null );
-			checkUserData( newUser, createdUser );
+			TestUtils.checkUserData( newUser, createdUser );
 
-			createdUser.setFirstName( createdUser.getFirstName() + "---- Updated------" );
+			createdUser.setFirstName( createdUser.getFirstName() + "-U-" );
 			redmineConnector.updateUser( createdUser );
 			User updatedUser = redmineConnector.getUserById( createdUser.getId(), null );
-			checkUserData( createdUser, updatedUser );
+			TestUtils.checkUserData( createdUser, updatedUser );
 
 		}
 		finally
@@ -112,7 +104,7 @@ public class TestRedmineUser
 		try
 		{
 			UserCreator userCreator = new UserCreator( 1 );
-			executeJob( userCreator );
+			TestUtils.executeJob( userCreator );
 
 			RedmineDataPaginator userPaginator = redmineConnector.getUsersIterator( 0, 25, null, null );
 
@@ -151,59 +143,6 @@ public class TestRedmineUser
 		}
 	}
 
-	private User newUserInstance()
-	{
-		User testUser = new User();
-
-		testUser.setFirstName( "Mohit" + System.currentTimeMillis() );
-		testUser.setLastName( "Gupta" + System.currentTimeMillis() );
-		synchronized( Thread.currentThread() )
-		{
-			USER_ID = USER_ID + 1;
-		}
-		testUser.setEmail( System.currentTimeMillis() + USER_ID + "@vedantatree.com" );
-		testUser.setLogin( Thread.currentThread().getName() + "." + System.currentTimeMillis() + ".test" + USER_ID );
-		testUser.setPassword( "secret" );
-		testUser.setAuthenticationSourceType( 2 );
-		Calendar cal = Calendar.getInstance();
-		testUser.setCreatedOn( cal.getTime() );
-		testUser.setLastLoginOn( cal.getTime() );
-		return testUser;
-	}
-
-	private void checkUserData( User originalUser, User userFromRedmine )
-	{
-		assertNotNull( "User from Redmine found null", userFromRedmine );
-		assertNotNull( "Id of user from Redmine found null", userFromRedmine.getId() );
-		assertEquals( "User first name is not matching", originalUser.getFirstName(), userFromRedmine.getFirstName() );
-		assertEquals( "User second name is not matching", originalUser.getLastName(), userFromRedmine.getLastName() );
-		assertEquals( "User Email is not matching", originalUser.getEmail(), userFromRedmine.getEmail() );
-
-		// TODO match created on, last access on etc
-	}
-
-	private void executeJob( Runnable job ) throws Exception
-	{
-
-		Thread thread1 = new Thread( job, "" + System.currentTimeMillis() );
-		Thread thread2 = new Thread( job, "" + System.currentTimeMillis() );
-		Thread thread3 = new Thread( job, "" + System.currentTimeMillis() );
-		Thread thread4 = new Thread( job, "" + System.currentTimeMillis() );
-		Thread thread5 = new Thread( job, "" + System.currentTimeMillis() );
-
-		thread1.start();
-		thread2.start();
-		thread3.start();
-		thread4.start();
-		thread5.start();
-
-		thread1.join();
-		thread2.join();
-		thread3.join();
-		thread4.join();
-		thread5.join();
-	}
-
 	class UserCreator implements Runnable
 	{
 
@@ -222,7 +161,7 @@ public class TestRedmineUser
 				try
 				{
 					Thread.sleep( 1000 );
-					User newUser = newUserInstance();
+					User newUser = TestUtils.newUserInstance();
 					redmineConnector.createUser( newUser );
 				}
 				catch( Exception e )
