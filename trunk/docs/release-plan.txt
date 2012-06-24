@@ -1,11 +1,11 @@
 ---------------------------------------
-0.7
+0.7 - released on Feb 2011
 ---------------------------------------
 Support for Basic CRUD Operations - Done
 
 
 ---------------------------------------
-1.0.0
+1.0.0 - release on 27-05-2012
 ---------------------------------------
 Support for fetching the list of Issue and Project objects - Done
 Exception Handling - Done ^ Ongoing Process
@@ -13,11 +13,22 @@ Stable than earlier, with better testing controls
 
 
 ---------------------------------------
-1.1.0
+1.1.0 - beta released on 17-06-2012 - final released on 25-06-2012
 ---------------------------------------
-Generic Component to Build the URL for all requests - In Progress
-Support filtering parameter - In Progress
-Support Includes parameter - In Progress
-Work for Users
+Generic Component to Build the URL for all requests
+Support filtering parameter
+Support Includes parameter
+Support for Users
 Test Cases for all above implementation
+
+---------------------------------------
+1.2.0 - Expected around 10-07-2012
+---------------------------------------
 Test with Redmine 2+
+Support for Attachments
+Support for Project Memberships
+Support Time Entries
+Support for Trackers
+Support for Issue Categories
+Test case for all new supported properties 
+More Test cases for 'includes' and 'filters'

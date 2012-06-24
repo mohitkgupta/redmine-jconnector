@@ -158,7 +158,7 @@ public class URLBuilder
 			return url;
 		}
 
-		String filterString = null;
+		String filterString = "";
 		for( Iterator<Map.Entry<String, String>> iterator = filters.entrySet().iterator(); iterator.hasNext(); )
 		{
 			filterString += URL_PARAM_SEPARATOR;
@@ -186,10 +186,10 @@ public class URLBuilder
 		url += URL_PARAM_SEPARATOR;
 		url += URL_INCLUDE_KEY;
 
-		String includeString = null;
+		String includeString = "";
 		for( Iterator<String> iterator = includes.iterator(); iterator.hasNext(); )
 		{
-			if( includeString != null )
+			if( includeString.trim().length() != 0 )
 			{
 				includeString += ", ";
 			}

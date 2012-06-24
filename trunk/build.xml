@@ -164,7 +164,9 @@
 	<target name="javadoc" description="Generates RedmineJConnector Javadocs" depends="dist">
 		<echo message="in javadoc" />
 		<echo message="${javadoc.dir}" />
-		<delete dir="${javadoc.dir}" failonerror="false" />
+		<delete dir="${javadoc.dir}" failonerror="false">
+			<exclude dir=".svn"/>
+		</delete>
 		<mkdir dir="${javadoc.dir}" />
 
 		<javadoc packagenames="com.vedantatree.*" sourcepath="${src.dir}" destdir="${javadoc.dir}" windowtitle="RedmineJConnector" source="1.6" access="protected" author="true" version="true" use="true" defaultexcludes="true" header='&lt;a href=\"http://www.vedantatree.com/\" target=\"_top\"&gt;RedmineJConnector&lt;/a&gt;'>
@@ -212,11 +214,11 @@
 
 	<formatter type="plain" usefile="false" />
 	<formatter type="xml" />
-	<!--test name="com.vedantatree.redmineconnector.test.RCTestCase" /-->
+	<!--test name="com.vedantatree.redmineconnector.test.TestRedmineProjects" /-->
 
 	<batchtest fork="yes" todir="${test.reports.dir}">
 		<fileset dir="${test.dir}">
-			<include name="**/*TestCase*.java" />
+			<include name="**/Test*.java" />
 		</fileset>
 	</batchtest>
 </junit>

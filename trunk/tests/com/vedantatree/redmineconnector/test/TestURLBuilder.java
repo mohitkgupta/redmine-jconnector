@@ -7,6 +7,7 @@ package com.vedantatree.redmineconnector.test;
  * and operations with different parameters. Make sure that result should match with hard coded result here in this test
  * case.
  * 
+ * @since 1.1.0
  */
 public class TestURLBuilder
 {
