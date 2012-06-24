@@ -17,9 +17,18 @@ Support for Roles
 Support for Groups
 Support for News
 
-We are supporting only API Access Key authentication. Decide, if we want to support user name and password also. However, API Access Key approach seems better.
+We are supporting only API Access Key authentication. Decide, if we want to support user name and password also. 
+However, API Access Key approach seems better. If we provides User Name/Pwd support, it should be encrypted.
 See if we can used annotations with JIBX
-Review of error handling
+Review of error handling - may have separate error handler
+Review of communication code - may have separate classes for communication, then code to parse and transform the 
+response codes can be moved out to these
+See if we can pool the restlet client connection, reuse these, have check on maximum connections opened at a time
+See if we should use JSON or XML or BOTH - Pros and Cons
+Improve logging
+Improve Java doc - ongoing
+
+**Test on Linux
 
 --------------------------------
 **Achieved or Planned**
