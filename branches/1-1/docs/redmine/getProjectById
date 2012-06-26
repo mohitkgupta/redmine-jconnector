@@ -1,0 +1,15 @@
+<project>
+	<id>1</id>
+	<name>Test Demo Project</name>
+	<identifier>test-demo</identifier>
+	<description></description>
+	<homepage></homepage>
+	<created_on>2010-12-30T15:23:07+02:00</created_on>
+	<updated_on>2010-12-30T15:23:07+02:00</updated_on>
+	<trackers type="array">
+		<tracker name="Bug" id="1"/>
+		<tracker name="Feature" id="2"/>
+		<tracker name="Support" id="3"/>
+		<tracker name="Test case" id="4"/>
+	</trackers>
+</project>

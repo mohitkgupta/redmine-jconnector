@@ -1,0 +1,47 @@
+---------------------------------------
+**Product Backlog**
+---------------------------------------
+Work for time entries
+Testing with Redmine 2+
+
+Support Issues Categories with Projects
+Support journal, attachments, children, attachments, relations, changesets and custom fields etc with Issue
+Support for Attachments
+Support for Project Memberships
+Support for Issue Relations
+Support for Versions
+Support for Queries
+Support for Trackers
+Support for Issue Categories
+Support for Roles
+Support for Groups
+Support for News
+
+We are supporting only API Access Key authentication. Decide, if we want to support user name and password also. 
+However, API Access Key approach seems better. If we provides User Name/Pwd support, it should be encrypted.
+See if we can used annotations with JIBX
+Review of error handling - may have separate error handler
+Review of communication code - may have separate classes for communication, then code to parse and transform the 
+response codes can be moved out to these
+See if we can pool the restlet client connection, reuse these, have check on maximum connections opened at a time
+See if we should use JSON or XML or BOTH - Pros and Cons
+Improve logging
+Improve Java doc - ongoing
+
+**Test on Linux
+
+Write documents for new developers, for code management, code style
+Include jalopy, checkstyle or sonar etc
+Write a single page design document
+
+--------------------------------
+**Achieved or Planned**
+--------------------------------
+Already achieved or Planned stories can be found with Release Plan and Sprint Plan
+
+--------------------------------
+**Deferred**
+--------------------------------
+
+Clean the binding file, use references if possible for various object mappings - read for reusable abstract bindings
+-- Because Jibx was not support some cleaning activities

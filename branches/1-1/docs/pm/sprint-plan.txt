@@ -1,0 +1,36 @@
+---------------------------------------
+sprint - 11-06-2012 <> 17-06-2012
+---------------------------------------
+Generic Component to Build the URL for all requests - Done
+Support filtering parameter - Done
+Support Includes parameter - Done
+Work for Users - Done with Test Case
+
+********
+Sprint achieved on time
+********
+
+---------------------------------------
+sprint - 18-06-2012 <> 24-06-2012
+---------------------------------------
+Test Cases for all above implementation
+Extensive Testing and Bug Fixing
+Test with Redmine 2.0+
+Create Wiki pages for project and give links at home page
+
+********
+Tasks not achieved and hence moved to next sprint as on 24-06-2012
+********
+Test with Redmine 2.0+
+Test case for TestURLBuilder
+Create Wiki pages for project and give links at home page
+
+---------------------------------------
+sprint - 24-06-2012 <> 01-07-2012
+---------------------------------------
+Test with Redmine 2.0+
+Test case for TestURLBuilder
+Support for Time Entries
+Create Wiki pages for project and give links at home page
+Update web page for code contribution
+
