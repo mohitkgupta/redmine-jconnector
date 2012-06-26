@@ -6,4 +6,6 @@ Upgrade Redmine - http://www.redmine.org/projects/redmine/wiki/RedmineUpgrade
 Jibx Eclipse Plugin - http://jibx.sourceforge.net/eclipse/
 Jibx Tutorial - http://www.ibm.com/developerworks/java/tutorials/j-jibx1/
 
-Start Redmine in Testing >>>>> ruby script/server webrick -e development
+Start Redmine in Testing >>>>> 
+1.4 >> ruby script/server webrick -e development
+2+ >> ruby script/rails server webrick -e development

@@ -30,6 +30,10 @@ Improve Java doc - ongoing
 
 **Test on Linux
 
+Write documents for new developers, for code management, code style
+Include jalopy, checkstyle or sonar etc
+Write a single page design document
+
 --------------------------------
 **Achieved or Planned**
 --------------------------------

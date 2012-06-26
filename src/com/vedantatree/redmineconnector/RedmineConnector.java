@@ -179,6 +179,8 @@ public class RedmineConnector
 	public boolean deleteProject( long projectId ) throws RCException
 	{
 		LOGGER.trace( "deleteProject: projectId[" + projectId + "]" );
+		
+		Utilities.assertNotNullArgument( projectId, "Project Id" );
 
 		try
 		{
