@@ -180,6 +180,7 @@
 	<link href="http://www.junit.org/junit/javadoc/" />
 	<link href="http://logging.apache.org/log4j/docs/api/" />
 	<link href="http://jibx.sourceforge.net/" />
+	<link href="http://www.restlet.org/documentation/2.0/jse/api/" />
 </javadoc>
 
 </target>

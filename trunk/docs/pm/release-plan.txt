@@ -13,18 +13,18 @@ Stable than earlier, with better testing controls
 
 
 ---------------------------------------
-1.1.0 - beta released on 17-06-2012 - final released on 25-06-2012
+1.1.0 - beta released on 17-06-2012 - final released on 26-06-2012
 ---------------------------------------
 Generic Component to Build the URL for all requests
 Support filtering parameter
 Support Includes parameter
 Support for Users
 Test Cases for all above implementation
+Test with Redmine 2.0.2
 
 ---------------------------------------
 1.2.0 - Expected around 10-07-2012
 ---------------------------------------
-Test with Redmine 2+
 Support for Attachments
 Support for Project Memberships
 Support Time Entries
