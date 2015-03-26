@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues type="array" limit="25" total_count="31" offset="0">
+	<issue>
+		<id>33</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="High" id="5" />
+		<author name="Redmine Admin" id="1" />
+		<subject>RedmineConnector TC Issue</subject>
+		<description>Test Issue from Redmine Connector TestCase - Long
+			Description</description>
+		<start_date>2011-03-20</start_date>
+		<due_date>2011-03-20</due_date>
+		<done_ratio>50</done_ratio>
+		<estimated_hours>12.5</estimated_hours>
+		<created_on>2011-02-20T17:03:49+02:00</created_on>
+		<updated_on>2011-02-20T17:03:49+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>31</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="High" id="5" />
+		<author name="Redmine Admin" id="1" />
+		<subject>RedmineConnector TC Issue</subject>
+		<description>Test Issue from Redmine Connector TestCase - Long
+			Description</description>
+		<start_date>2011-02-20</start_date>
+		<due_date>2011-02-20</due_date>
+		<done_ratio>50</done_ratio>
+		<estimated_hours>12.5</estimated_hours>
+		<created_on>2011-02-20T17:02:38+02:00</created_on>
+		<updated_on>2011-02-20T17:02:38+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>30</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="High" id="5" />
+		<author name="Redmine Admin" id="1" />
+		<subject>RedmineConnector TC Issue</subject>
+		<description>Test Issue from Redmine Connector TestCase - Long
+			Description</description>
+		<start_date>2011-01-20</start_date>
+		<due_date>2011-01-20</due_date>
+		<done_ratio>50</done_ratio>
+		<estimated_hours>12.5</estimated_hours>
+		<created_on>2011-02-20T17:01:17+02:00</created_on>
+		<updated_on>2011-02-20T17:01:17+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>29</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="High" id="5" />
+		<author name="Redmine Admin" id="1" />
+		<subject>RedmineConnector TC Issue</subject>
+		<description>Test Issue from Redmine Connector TestCase - Long
+			Description</description>
+		<start_date>2011-11-20</start_date>
+		<due_date>2011-11-20</due_date>
+		<done_ratio>50</done_ratio>
+		<estimated_hours>12.5</estimated_hours>
+		<created_on>2011-02-20T16:11:16+02:00</created_on>
+		<updated_on>2011-02-20T16:11:16+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>28</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="High" id="5" />
+		<author name="Redmine Admin" id="1" />
+		<subject>RedmineConnector TC Issue</subject>
+		<description>Test Issue from Redmine Connector TestCase - Long
+			Description</description>
+		<start_date>2011-04-20</start_date>
+		<due_date>2011-04-20</due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours>12.5</estimated_hours>
+		<created_on>2011-02-20T16:04:45+02:00</created_on>
+		<updated_on>2011-02-20T16:04:45+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>27</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>RedmineConnector TC Issue</subject>
+		<description>Test Issue from Redmine Connector TestCase - Long
+			Description</description>
+		<start_date>2011-12-20</start_date>
+		<due_date>2011-12-20</due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours>12.5</estimated_hours>
+		<created_on>2011-02-20T15:12:35+02:00</created_on>
+		<updated_on>2011-02-20T15:12:35+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>25</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>RedmineConnector TC Issue</subject>
+		<description>Test Issue from Redmine Connector TestCase - Long
+			Description</description>
+		<start_date>2011-02-20</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-20T14:17:10+02:00</created_on>
+		<updated_on>2011-02-20T14:17:10+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>24</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>RedmineConnector TC Issue</subject>
+		<description>Test Issue from Redmine Connector TestCase - Long
+			Description</description>
+		<start_date>2011-02-20</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-20T14:14:17+02:00</created_on>
+		<updated_on>2011-02-20T14:14:17+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>23</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>RedmineConnector TC Issue</subject>
+		<description>Test Issue from Redmine Connector TestCase - Long
+			Description</description>
+		<start_date>2011-02-20</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-20T14:11:16+02:00</created_on>
+		<updated_on>2011-02-20T14:11:16+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>22</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-20</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-20T13:56:05+02:00</created_on>
+		<updated_on>2011-02-20T13:56:05+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>21</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-20</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-20T13:02:16+02:00</created_on>
+		<updated_on>2011-02-20T13:02:16+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>20</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T18:20:09+02:00</created_on>
+		<updated_on>2011-02-13T18:20:09+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>19</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T18:19:40+02:00</created_on>
+		<updated_on>2011-02-13T18:19:40+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>18</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T18:16:22+02:00</created_on>
+		<updated_on>2011-02-13T18:16:22+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>17</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T18:14:14+02:00</created_on>
+		<updated_on>2011-02-13T18:14:14+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>16</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T18:11:57+02:00</created_on>
+		<updated_on>2011-02-13T18:11:57+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>15</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T18:10:56+02:00</created_on>
+		<updated_on>2011-02-13T18:10:56+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>14</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T18:06:25+02:00</created_on>
+		<updated_on>2011-02-13T18:06:25+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>13</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T17:59:24+02:00</created_on>
+		<updated_on>2011-02-13T17:59:24+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>12</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T17:50:03+02:00</created_on>
+		<updated_on>2011-02-13T17:50:03+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>11</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T17:47:02+02:00</created_on>
+		<updated_on>2011-02-13T17:47:02+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>10</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T17:44:37+02:00</created_on>
+		<updated_on>2011-02-13T17:44:37+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>9</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T17:41:39+02:00</created_on>
+		<updated_on>2011-02-13T17:41:39+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>8</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T17:26:11+02:00</created_on>
+		<updated_on>2011-02-13T17:26:11+02:00</updated_on>
+	</issue>
+	<issue>
+		<id>7</id>
+		<project name="Test Demo Project" id="1" />
+		<tracker name="Bug" id="1" />
+		<status name="New" id="1" />
+		<priority name="Normal" id="4" />
+		<author name="Redmine Admin" id="1" />
+		<subject>Remote Issue</subject>
+		<description></description>
+		<start_date>2011-02-13</start_date>
+		<due_date></due_date>
+		<done_ratio>0</done_ratio>
+		<estimated_hours></estimated_hours>
+		<created_on>2011-02-13T17:07:23+02:00</created_on>
+		<updated_on>2011-02-13T17:07:23+02:00</updated_on>
+	</issue>
+</issues>

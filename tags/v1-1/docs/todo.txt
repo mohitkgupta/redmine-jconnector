@@ -1,0 +1,1 @@
+Use Eclipse plugin of Jibx for development
