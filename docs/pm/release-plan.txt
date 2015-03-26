@@ -23,8 +23,15 @@ Test Cases for all above implementation
 Test with Redmine 2.0.2
 
 ---------------------------------------
-1.2.0 - Expected around 10-07-2012
+2.0 - Expected around 15-08-2013
 ---------------------------------------
+Redmine 2.4 support
+Decouple JIBX from main code
+
+---------------------------------------
+2.1 - Expected around 15-08-2013
+---------------------------------------
+
 Support for Attachments
 Support for Project Memberships
 Support Time Entries
